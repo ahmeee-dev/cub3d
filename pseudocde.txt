@@ -1,0 +1,22 @@
+parsing:
+    checks:
+        the map is even
+        the map has only 1 letter [N, S, E, W]
+        the map ends with walls in every side
+        spaces have to be ignored
+    map:
+        the first cycle sets che expected length [x]
+        y increases as many times as we call the gnl function and is different from NULL
+        we allocate an array as long as x * y
+space:
+    spawn:
+        the letter is the direction we are going to face when spawned
+        the position of the letter is our position
+    prospective:
+        the prospective is concentric
+    movements:
+        x0 and y0 make the top left corner of the map, so x(max) and y(max) convey in the bottom right corner
+        every W/S movement means an increase in the xΔ and yΔ
+        every A/D turn means an increase or decrease in the a(α) angle.
+technique:
+    raytracing will be used to create the perspective of the 'character'
