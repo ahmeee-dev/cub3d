@@ -19,4 +19,4 @@ space:
         every W/S movement means an increase in the xΔ and yΔ
         every A/D turn means an increase or decrease in the a(α) angle.
 technique:
-    raytracing will be used to create the perspective of the 'character'
+    raycasting will be used to create the perspective of the 'character'
