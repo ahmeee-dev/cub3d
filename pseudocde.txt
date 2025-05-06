@@ -1,11 +1,11 @@
 parsing:
     checks:
-        the map is even
+        the map is not necessary even
         the map has only 1 letter [N, S, E, W]
         the map ends with walls in every side
-        spaces have to be ignored
+        spaces have an arbitrary behaviour (ignored or not)
     map:
-        the first cycle sets the expected length [x]
+        x is variable depending on the row
         y increases as many times as we call the gnl function and is different from NULL
         we allocate an array long as x * y
 space:
