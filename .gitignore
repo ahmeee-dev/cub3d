@@ -43,6 +43,7 @@
 *.pdb
 
 .minilibx
+.DS_Store
 
 # Kernel Module Compile Results
 *.mod*
