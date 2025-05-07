@@ -6,19 +6,16 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:52:38 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/06 16:54:32 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/07 10:08:40 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isnum(char *str)
+int	ft_isnum(char *c)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] <= '0' || str[i] >= '9')
-			return (0);
-	}
+	if (c <= '0' || c >= '9')
+		return (0);
 	return (1);
 }
