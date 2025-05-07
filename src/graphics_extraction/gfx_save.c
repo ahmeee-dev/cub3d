@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 10:39:08 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/07 11:00:22 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/07 11:10:15 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	save_color(int *i, int *dest, char *line)
 	*dest = color_value(line);
 }
 
-void	get_images(char *file, t_colors *colors)
+void	get_graphics(char *file, t_colors *colors)
 {
 	int	fd;
 	char	*line;

@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/06 16:19:02 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/07 11:10:41 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ typedef struct	s_colors
 	char	*et;
 	char	*wt;
 }		t_colors;
+
+
+void	get_graphics(char *file, t_colors *colors);
 
 
 #endif
