@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/07 11:46:19 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/07 15:40:05 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,6 @@ void	mymlx_pixel_put(t_mlx *data, int x, int y, int color);
 
 
 
-void	get_graphics(char *file, t_colors *colors);
+int	get_graphics(char *file, t_colors *colors);
 
 #endif
