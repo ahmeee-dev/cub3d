@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 10:39:08 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/07 11:10:15 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/07 11:57:48 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	color_value(char *line)
 	int	j;
 
 	value = 0;
-	j = 2; //start directly after element's name
+	j = 1; //start directly after element's name
 		value |= (ft_atoi(line + j) << 16);
 	while (line[j] != ',')
 		j++;
@@ -29,6 +29,8 @@ int	color_value(char *line)
 	return (value);
 }
 
+
+/*controlla che non ci siano altre lettere oltre a spazio e newline dopo la fine della riga*/
 void	save_color(int *i, int *dest, char *line)
 {
 	int	j;
@@ -37,7 +39,7 @@ void	save_color(int *i, int *dest, char *line)
 
 	check = 0;
 	commas = 0;
-	j = 2;
+	j = 1;
 	while (line[j] == ' ')
 		j++;
 	while(line[j] != '\n' && line[j] != ' ' && line[j] != '\0')
@@ -55,6 +57,17 @@ void	save_color(int *i, int *dest, char *line)
 		error_function(); //still to create
 	(*i)++;
 	*dest = color_value(line);
+}
+
+/*da controllare che finisca bene (solo con spazi o newline) */
+void	get_path(int *i, char **dest, char *line)
+{
+	int	j;
+
+	line = ft_strstr(line, "./");
+	if (!line)
+		error_function(); //still to create
+	*dest = ft_strtrim(line, "./\n");
 }
 
 void	get_graphics(char *file, t_colors *colors)
@@ -76,9 +89,9 @@ void	get_graphics(char *file, t_colors *colors)
 			save_image(&i, &colors->et, line);
 		else if (ft_strnstr(line, "WT", 2))
 			save_image(&i, &colors->wt, line);
-		else if (ft_strnstr(line, "c", 2))
+		else if (ft_strnstr(line, "c", 1))
 			save_color(&i, &colors->ceiling, line);
-		else if (ft_strnstr(line, "f", 2))
+		else if (ft_strnstr(line, "f", 1))
 			save_color(&i, &colors->floor, line);
 		line = get_next_line(fd);
 	}
