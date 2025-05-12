@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 10:39:08 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/12 10:10:13 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/12 11:02:39 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	save_color(int *i, int *dest, char *line)
 	*dest = color_value(line);
 }
 
-void	get_path(int *i, char **dest, char *line)
+void	save_image(int *i, char **dest, char *line)
 {
 	line = ft_strstr(line, "./");
 	if (!line)
@@ -88,9 +88,10 @@ void	get_path(int *i, char **dest, char *line)
 	(*i)++;
 	if (!check_safe(line, 1))
 		error_function(); //still to create, wrong format
+
 }
 
-void	get_graphics(char *file, t_colors *colors)
+void	get_graphics(char *file, int *i, t_data *data)
 {
 	int	fd;
 	char	*line;
@@ -106,17 +107,17 @@ void	get_graphics(char *file, t_colors *colors)
 	while (line != NULL)
 	{
 		if (ft_strnstr(line, "NT", 2))
-			save_image(&i, &colors->nt, line); 
+			save_image(&i, &data->colors.nt, line); 
 		else if (ft_strnstr(line, "ST", 2))
-			save_image(&i, &colors->st, line);
+			save_image(&i, &data->colors.st, line);
 		else if (ft_strnstr(line, "ET", 2))
-			save_image(&i, &colors->et, line);
+			save_image(&i, &data->colors.et, line);
 		else if (ft_strnstr(line, "WT", 2))
-			save_image(&i, &colors->wt, line);
+			save_image(&i, &data->colors.wt, line);
 		else if (ft_strnstr(line, "c", 1))
-			save_color(&i, &colors->ceiling, line);
+			save_color(&i, &data->colors.ceiling, line);
 		else if (ft_strnstr(line, "f", 1))
-			save_color(&i, &colors->floor, line);
+			save_color(&i, &data->colors.floor, line);
 		line = get_next_line(fd);
 		if (i < 6)
 			gnl_calls++;
