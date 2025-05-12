@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 10:39:08 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/12 10:04:48 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/12 10:10:13 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_safe(char *line, int type)
 		j++;
 	while (line[j] == ' ')	
 		j++;
-	while (ft_isalnum(line[j]) || (type == 1 && line[j] == '_' ) || (type == 2 && line[j] == ','))
+	while (ft_isalnum(line[j]) || (type == 1 && (line[j] == '_' || line[j] == '.')) || (type == 2 && line[j] == ','))
 		j++;
 	while (line[j] == ' ')	
 		j++;
@@ -98,6 +98,9 @@ void	get_graphics(char *file, t_colors *colors)
 	int	gnl_calls;
 
 	fd = open(file);
+	if (fd == -1)
+		error_function(); //still to create, file not found
+	gnl_calls = 1;
 	line = get_next_line(line);
 	i = 0;
 	while (line != NULL)

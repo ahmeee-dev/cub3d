@@ -6,13 +6,13 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:08:51 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/06 15:58:48 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/12 10:09:15 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	errors_check(char *file)
+int	file_check(char *file)
 {
 	int	fd;
 
@@ -22,6 +22,4 @@ int	errors_check(char *file)
 		ft_printf("Error\n");
 		return (-1);
 	} 
-	
-	
 }
