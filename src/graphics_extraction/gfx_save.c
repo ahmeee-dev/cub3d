@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 10:39:08 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/07 16:23:59 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/12 10:04:48 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	save_color(int *i, int *dest, char *line)
 		j++;
 	}
 	if (commas != 2 || check == 0 || check > 3)
-		error_function(); //still to create
+		error_function(); //still to create, wrong format
 	(*i)++;
 	*dest = color_value(line);
 }
@@ -83,11 +83,11 @@ void	get_path(int *i, char **dest, char *line)
 {
 	line = ft_strstr(line, "./");
 	if (!line)
-		error_function(); //still to create
+		error_function(); //still to create, No path
 	*dest = ft_strtrim(line, "./\n");
 	(*i)++;
 	if (!check_safe(line, 1))
-		error_function(); //still to create
+		error_function(); //still to create, wrong format
 }
 
 void	get_graphics(char *file, t_colors *colors)
@@ -119,6 +119,6 @@ void	get_graphics(char *file, t_colors *colors)
 			gnl_calls++;
 	}
 	if (i != 6)
-		error_function(); //still to create
+		error_function(); //still to create, too much data before the map
 	return (gnl_calls);
 }
