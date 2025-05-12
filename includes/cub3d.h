@@ -6,16 +6,16 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/12 11:15:24 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:12:40 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 #define CUB3D_H
 
-#define WALL 1
-#define FLOOR 0
-#define BLANK 1
+#define WALL 49
+#define FLOOR 48
+#define BLANK -1
 #define WIDTH 1920
 #define HEIGHT 1080
 
