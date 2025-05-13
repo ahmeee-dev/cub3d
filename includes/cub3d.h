@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/12 15:12:40 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/13 09:56:06 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct	s_data
 	t_colors	colors;
 	t_block		**map;
 	t_sizes		sizes;
+	int		*matrix;
 }		t_data;
 
 typedef	struct	s_block
@@ -106,8 +107,10 @@ void	mymlx_init(t_mlx *data, char *filename);
 void	mymlx_pixel_put(t_mlx *data, int x, int y, int color);
 
 //Parsing functions
-char	**map_parsing(char *file, t_colors *colors, t_data *data);
+void	map_parsing(char *file, t_data *data);
 int	map_save(char *file, int gnl_calls, t_data *data);
-int	get_graphics(char *file, t_colors *colors);
+int	get_graphics(char *file, t_data *data);
+//Matrix-realted functions
+void	matrix_creation(t_data *data, int fd, int gnl_calls);
 
 #endif

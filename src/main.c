@@ -6,11 +6,16 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:06 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/06 15:02:36 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/13 09:56:33 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d.h"
+
 int	main(int argc, char **argv)
 {
-	
+	t_data	data;
+
+	map_parsing(argv, &data);
+	return (1);	
 }

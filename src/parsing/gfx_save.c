@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 10:39:08 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/12 11:02:39 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/13 09:57:05 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	save_image(int *i, char **dest, char *line)
 
 }
 
-void	get_graphics(char *file, int *i, t_data *data)
+int	get_graphics(char *file, t_data *data)
 {
 	int	fd;
 	char	*line;
