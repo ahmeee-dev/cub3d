@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/13 10:44:46 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/13 10:57:20 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,5 @@ void	matrix_creation(t_mlx *data, int fd, int gnl_calls);
 
 //Parsing functions
 int	get_graphics(char *file, t_data *data);
-int	map_save(int fd, int gnl_calls, t_data *data);
-
+int	get_map(int fd, int gnl_calls, t_data *data);
 #endif

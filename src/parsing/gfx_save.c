@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 10:39:08 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/13 09:57:05 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/13 10:56:09 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	check_safe(char *line, int type)
 	while (line[j] == ' ')	
 		j++;
 	if (line[j] == '\n')
-		return (1);
-	return (0);
+		return (0);
+	return (1); //error
 }
 
 int	color_value(char *line)
@@ -49,14 +49,14 @@ int	color_value(char *line)
 }
 
 
-void	save_color(int *i, int *dest, char *line)
+int	save_color(int *i, int *dest, char *line)
 {
 	int	j;
 	int	check;
 	int	commas;
 
 	if (!check_safe(line, 1))
-		error_function(); //still to create
+		return (1); //still to create
 	check = 0;
 	commas = 0;
 	j = 1;
@@ -74,21 +74,22 @@ void	save_color(int *i, int *dest, char *line)
 		j++;
 	}
 	if (commas != 2 || check == 0 || check > 3)
-		error_function(); //still to create, wrong format
+		return (1); //	wrong format
 	(*i)++;
 	*dest = color_value(line);
+	return (0);
 }
 
-void	save_image(int *i, char **dest, char *line)
+int	save_image(int *i, char **dest, char *line)
 {
 	line = ft_strstr(line, "./");
 	if (!line)
-		error_function(); //still to create, No path
+		return (1); 
 	*dest = ft_strtrim(line, "./\n");
 	(*i)++;
 	if (!check_safe(line, 1))
-		error_function(); //still to create, wrong format
-
+		return (1); 
+	return (0);
 }
 
 int	get_graphics(char *file, t_data *data)
@@ -97,32 +98,33 @@ int	get_graphics(char *file, t_data *data)
 	char	*line;
 	int	i;
 	int	gnl_calls;
+	int	result;
 
 	fd = open(file);
 	if (fd == -1)
-		error_function(); //still to create, file not found
+		return (0); //	file not found
 	gnl_calls = 1;
 	line = get_next_line(line);
 	i = 0;
 	while (line != NULL)
 	{
 		if (ft_strnstr(line, "NT", 2))
-			save_image(&i, &data->colors.nt, line); 
+			result = save_image(&i, &data->colors.nt, line); 
 		else if (ft_strnstr(line, "ST", 2))
-			save_image(&i, &data->colors.st, line);
+			result = save_image(&i, &data->colors.st, line);
 		else if (ft_strnstr(line, "ET", 2))
-			save_image(&i, &data->colors.et, line);
+			result = save_image(&i, &data->colors.et, line);
 		else if (ft_strnstr(line, "WT", 2))
-			save_image(&i, &data->colors.wt, line);
+			result = save_image(&i, &data->colors.wt, line);
 		else if (ft_strnstr(line, "c", 1))
-			save_color(&i, &data->colors.ceiling, line);
+			result = save_color(&i, &data->colors.ceiling, line);
 		else if (ft_strnstr(line, "f", 1))
-			save_color(&i, &data->colors.floor, line);
+			result = save_color(&i, &data->colors.floor, line);
 		line = get_next_line(fd);
 		if (i < 6)
 			gnl_calls++;
 	}
-	if (i != 6)
-		error_function(); //still to create, too much data before the map
+	if (i != 6 || result)
+		return (0);	//too much data before the map
 	return (gnl_calls);
 }

@@ -6,26 +6,29 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:25:26 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/13 10:39:12 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/13 10:59:45 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 
-
-void	map_parsing(char *file, t_data *data)
+// 1 = success, 0 = failure
+int	map_parsing(char *file, t_data *data)
 {
 	int	gnl_calls;
 	int	fd;
 
-	errors_checks(file);
 	gnl_calls = get_graphics(file, &data->colors);
+	if (!gnl_calls)
+		return (0);
 	get_next_line(-1);
 	fd = open(file);
-	get_map(fd, gnl_calls, data);
+	if (!get_map(fd, gnl_calls, data))
+		return (0);
 	close(fd);
 	get_next_line(-1);
 	fd = open(file);
 	matrix_creation(data, fd, gnl_calls);
+	return (1);
 }

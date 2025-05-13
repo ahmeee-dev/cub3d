@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:25:11 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/13 10:41:29 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/13 10:58:58 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	map_check(int fd, char *line, t_data *data)
 		line = next;
 		next = get_next_line(fd);
 	}
+	return (0);
 }
 
 void	get_sizes(int fd, char *line, t_data *data)
@@ -84,7 +85,7 @@ void	get_sizes(int fd, char *line, t_data *data)
 	data->sizes.map_lenght = max_lenght;
 }
 
-int	map_save(int fd, int gnl_calls, t_data *data)
+int	get_map(int fd, int gnl_calls, t_data *data)
 {
 	int	i;
 	char	*line;
@@ -95,7 +96,8 @@ int	map_save(int fd, int gnl_calls, t_data *data)
 		line = get_next_line(fd);
 		i++;
 	}
-	map_check(fd, line, data);
+	if (map_check(fd, line, data))
+		return (0);
 	close(fd);
 	get_next_line(-1);
 	while (i < gnl_calls)
@@ -104,5 +106,5 @@ int	map_save(int fd, int gnl_calls, t_data *data)
 		i++;
 	}
 	get_sizes(fd, line, data);
-	return (gnl_calls);
+	return (1);
 }
