@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:06 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/13 11:06:16 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/13 11:50:55 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,9 @@ int	main(int argc, char **argv)
 	t_mlx	data;
 
 	(void)argc;
-	map_parsing(argv[1], &data.data);
+	if (!map_parsing(argv[1], &data.data))
+		ft_printf("Error: Invalid map file\n");
+	exit(0);
 	mymlx_init(&data, "map.cub");
 	mlx_hook(data.pic.win.p, 17, 0, mymlx_exit, &data);
 	mlx_key_hook(data.pic.win.p, key_handler, &data);

@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 10:39:08 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/13 11:22:08 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/13 11:59:17 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	save_image(int *i, char **dest, char *line)
 		return (1); 
 	*dest = ft_strtrim(line, "./\n");
 	(*i)++;
-	if (!check_safe(line, 1))
+	if (check_safe(line, 1))
 		return (1); 
 	return (0);
 }
@@ -124,6 +124,7 @@ int	get_graphics(char *file, t_data *data)
 		if (i < 6)
 			gnl_calls++;
 	}
+	ft_printf("%d	%d\n", i, gnl_calls);
 	if (i != 6 || result)
 		return (0);	//too much data before the map
 	return (gnl_calls);
