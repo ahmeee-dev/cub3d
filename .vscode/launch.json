@@ -1,0 +1,17 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Debug C (clang)",
+			"type": "lldb",
+			"request": "launch",
+			"program": "${workspaceFolder}/a.out", // o il nome del tuo eseguibile
+			"args": [],
+			"cwd": "${workspaceFolder}",
+			"stopAtEntry": false,
+			"environment": [],
+			"externalConsole": false,
+			"preLaunchTask": "build"
+		}
+	]
+}

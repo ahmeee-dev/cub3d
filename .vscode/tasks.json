@@ -1,0 +1,29 @@
+{
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "build",
+                "type": "shell",
+                "command": "/usr/bin/clang",
+                "args": [
+                    "-fcolor-diagnostics",
+                    "-fansi-escape-codes",
+                    "-g",
+                    "${file}",
+                    "-o",
+                    "${fileDirname}/a.out"
+                ],
+                "options": {
+                    "cwd": "${fileDirname}"
+                },
+                "problemMatcher": [
+                    "$gcc"
+                ],
+                "group": {
+                    "kind": "build",
+                    "isDefault": true
+                },
+                "detail": "Attività di compilazione per C con clang"
+            }
+        ]
+    }
