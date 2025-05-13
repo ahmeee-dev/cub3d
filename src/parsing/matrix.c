@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 09:28:36 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/13 14:53:09 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/13 15:06:26 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	matrix_population(int *matrix, int fd, int gnl_calls)
 		while (line[i] != '\n' && line[i] != '\0')
 		{
 			if (line[i] == ' ')
-				matrix[j] = -1;
+				matrix[j] = 2;
 			else if (line[i] == '0')
 				matrix[j] = 0; 
 			else if (line[i] == '1')
@@ -42,11 +42,11 @@ void	matrix_population(int *matrix, int fd, int gnl_calls)
 
 void	matrix_creation(t_data *data, int fd, int gnl_calls)
 {
+	int	i = 0;
+
 	data->matrix = (int *)malloc(sizeof(int) * (data->sizes.map_height * data->sizes.map_lenght));
 	matrix_population(data->matrix, fd, gnl_calls);
-
-	for (int i = 0; i < data->sizes.map_height * data->sizes.map_lenght; i++)
-	{
-		ft_printf("%d ", data->matrix[i]);
-	}
 }
+
+// Problem: the map in the file doesn't have every line filled to the end, that means that I personally have
+// to check that every line is filled to the end, and, in case, to fill it actively
