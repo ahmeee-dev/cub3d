@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:25:26 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/13 11:52:14 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/13 14:43:03 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	map_parsing(char *file, t_data *data)
 		return (0);
 	get_next_line(-1);
 	fd = open(file, O_RDONLY);
-	if (!get_map(fd, gnl_calls, data))
+	if (!get_map(file, gnl_calls, data))
 		return (0);
 	close(fd);
 	get_next_line(-1);

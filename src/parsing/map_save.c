@@ -6,12 +6,13 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:25:11 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/13 11:21:45 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/13 14:42:35 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+// da integrare tolleranza per il Player
 int	map_check(int fd, char *line)
 {
 	int	i;
@@ -20,10 +21,11 @@ int	map_check(int fd, char *line)
 	char	*next;
 
 	i = 0;
-	not_first = 0;
 	next = get_next_line(fd);
 	while (line != NULL)
 	{
+		i = 0;
+		not_first = 0;
 		while (line[i] != '\n' && line[i] != '\0')
 		{
 			if (line[i] == WALL)
@@ -70,6 +72,7 @@ void	get_sizes(int fd, char *line, t_data *data)
 	height = 0;
 	while (line != NULL)
 	{
+		i = 0;
 		height++;
 		lenght = 0;
 		while (line[i] != '\n' && line[i] != '\0')
@@ -85,13 +88,15 @@ void	get_sizes(int fd, char *line, t_data *data)
 	data->sizes.map_lenght = max_lenght;
 }
 
-int	get_map(int fd, int gnl_calls, t_data *data)
+int	get_map(char *file, int gnl_calls, t_data *data)
 {
 	int	i;
 	char	*line;
+	int	fd;
 
+	fd = open(file, O_RDONLY);
 	i = 0;
-	while (i < gnl_calls)
+	while (i <= gnl_calls + 1)
 	{
 		line = get_next_line(fd);
 		i++;
@@ -100,7 +105,9 @@ int	get_map(int fd, int gnl_calls, t_data *data)
 		return (0);
 	close(fd);
 	get_next_line(-1);
-	while (i < gnl_calls)
+	fd = open(file, O_RDONLY);
+	i = 0;
+	while (i <= gnl_calls + 1)
 	{
 		line = get_next_line(fd);
 		i++;
