@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/13 10:42:15 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/13 10:44:46 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 #define WALL 49
 #define FLOOR 48
-#define BLANK -1
 
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 600
