@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/13 09:56:06 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/13 10:13:36 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,9 @@
 typedef struct	s_data
 {
 	t_colors	colors;
-	t_block		**map;
 	t_sizes		sizes;
 	int		*matrix;
 }		t_data;
-
-typedef	struct	s_block
-{
-	int		value;
-}		t_block;
 
 typedef struct	s_sizes
 {
