@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/13 10:15:25 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/13 10:42:15 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,20 @@
 # include <math.h>
 
 //Mlx data
+typedef struct	s_data
+{
+	t_colors	colors;
+	t_sizes		sizes;
+	int		*matrix;
+}		t_data;
+
+
+typedef struct	s_sizes
+{
+	int		map_height;
+	int		map_lenght;
+}		t_sizes;
+
 typedef struct s_window
 {
 	void			*p;
@@ -93,6 +107,7 @@ typedef struct s_raycaster
 
 typedef struct s_mlx
 {
+	t_data		data;
 	void		*mlx_p;
 	t_picture	pic;
 	t_raycaster	raycaster;
@@ -119,5 +134,9 @@ void	mymlx_pixel_put(t_mlx *data, int x, int y, int color);
 
 //Matrix-realted functions
 void	matrix_creation(t_mlx *data, int fd, int gnl_calls);
+
+//Parsing functions
+int	get_graphics(char *file, t_data *data);
+int	map_save(int fd, int gnl_calls, t_data *data);
 
 #endif

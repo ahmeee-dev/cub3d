@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:25:11 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/12 17:12:21 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/13 10:41:29 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,5 @@ int	map_save(int fd, int gnl_calls, t_data *data)
 		i++;
 	}
 	get_sizes(fd, line, data);
-;
-
-
+	return (gnl_calls);
 }
