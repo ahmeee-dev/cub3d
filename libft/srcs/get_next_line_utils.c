@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 02:07:58 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/06 17:51:13 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/13 11:31:37 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_strrlen(const char *s, char c)
 	return (i);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+size_t	ft_gnl_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;
 
@@ -56,7 +56,7 @@ char	*ft_strndup(const char *s, size_t n)
 	new = (char *) malloc(sizeof(char) * (i + 1));
 	if (!new)
 		return (NULL);
-	ft_strlcpy(new, s, i + 1);
+	ft_gnl_strlcpy(new, s, i + 1);
 	return (new);
 }
 
@@ -79,9 +79,9 @@ char	*ft_strnjoin(char *s1, char *s2, ssize_t bytes)
 	if (!new)
 		return (NULL);
 	if (s1)
-		ft_strlcpy(new, s1, i + 1);
+		ft_gnl_strlcpy(new, s1, i + 1);
 	if (s2)
-		ft_strlcpy(&new[i], s2, bytes + 1);
+		ft_gnl_strlcpy(&new[i], s2, bytes + 1);
 	free (s1);
 	return (new);
 }
