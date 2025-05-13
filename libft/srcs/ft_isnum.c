@@ -6,15 +6,12 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:52:38 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/07 10:08:40 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/13 11:25:01 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isnum(char *c)
+int	ft_isnum(char c)
 {
-	int	i;
-
-	i = 0;
 	if (c <= '0' || c >= '9')
 		return (0);
 	return (1);

@@ -6,13 +6,13 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:25:11 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/13 10:58:58 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/13 11:21:45 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	map_check(int fd, char *line, t_data *data)
+int	map_check(int fd, char *line)
 {
 	int	i;
 	char	*prev;
@@ -61,25 +61,25 @@ int	map_check(int fd, char *line, t_data *data)
 void	get_sizes(int fd, char *line, t_data *data)
 {
 	int	i;
-	int	check;
 	int	height;
 	int	lenght;
 	int	max_lenght;
 
+	i = 0;
 	max_lenght = 0;
-
+	height = 0;
 	while (line != NULL)
 	{
+		height++;
 		lenght = 0;
-		check = 0;
-		while (line[i] != '\n')
+		while (line[i] != '\n' && line[i] != '\0')
 		{
-			if (line[i] == '1' || line[i] == '0' && check == 0)
-				check++;
+			i++;
 			lenght++;
 		}
 		if (lenght > max_lenght)
 			max_lenght = lenght;
+		line = get_next_line(fd);
 	}
 	data->sizes.map_height = height;
 	data->sizes.map_lenght = max_lenght;
@@ -96,7 +96,7 @@ int	get_map(int fd, int gnl_calls, t_data *data)
 		line = get_next_line(fd);
 		i++;
 	}
-	if (map_check(fd, line, data))
+	if (map_check(fd, line))
 		return (0);
 	close(fd);
 	get_next_line(-1);

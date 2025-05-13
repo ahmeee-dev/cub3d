@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/13 11:07:59 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/13 11:15:57 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <OpenGL/gl3.h>
 # include <stdlib.h>
 # include <math.h>
+#include <fcntl.h>
 
 //Mlx data
 
@@ -133,7 +134,7 @@ void	mymlx_init(t_mlx *data, char *filename);
 void	mymlx_pixel_put(t_mlx *data, int x, int y, int color);
 
 //Matrix-realted functions
-void	matrix_creation(t_mlx *data, int fd, int gnl_calls);
+void	matrix_creation(t_data *data, int fd, int gnl_calls);
 
 //Parsing functions
 int	map_parsing(char *file, t_data *data);

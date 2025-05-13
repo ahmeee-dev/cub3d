@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 10:39:08 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/13 10:56:09 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/13 11:22:08 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,11 @@ int	get_graphics(char *file, t_data *data)
 	int	gnl_calls;
 	int	result;
 
-	fd = open(file);
+	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (0); //	file not found
 	gnl_calls = 1;
-	line = get_next_line(line);
+	line = get_next_line(fd);
 	i = 0;
 	while (line != NULL)
 	{
