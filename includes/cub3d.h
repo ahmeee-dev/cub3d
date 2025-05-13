@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/13 10:57:20 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/13 11:04:13 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,6 @@
 # include <math.h>
 
 //Mlx data
-typedef struct	s_data
-{
-	t_colors	colors;
-	t_sizes		sizes;
-	int		*matrix;
-}		t_data;
 
 
 typedef struct	s_sizes
@@ -104,6 +98,13 @@ typedef struct s_raycaster
 	float		proj_plane_dist;
 }	t_raycaster;
 
+typedef struct	s_data
+{
+	t_colors	colors;
+	t_sizes		sizes;
+	int		*matrix;
+}		t_data;
+
 typedef struct s_mlx
 {
 	t_data		data;
@@ -135,6 +136,7 @@ void	mymlx_pixel_put(t_mlx *data, int x, int y, int color);
 void	matrix_creation(t_mlx *data, int fd, int gnl_calls);
 
 //Parsing functions
+int	map_parsing(char *file, t_data *data);
 int	get_graphics(char *file, t_data *data);
 int	get_map(int fd, int gnl_calls, t_data *data);
 #endif
