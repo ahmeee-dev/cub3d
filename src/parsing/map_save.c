@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:25:11 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/13 14:42:35 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/14 12:41:24 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	get_sizes(int fd, char *line, t_data *data)
 	i = 0;
 	max_lenght = 0;
 	height = 0;
+	while (line[0] == '\n')
+		line = get_next_line(fd);
 	while (line != NULL)
 	{
 		i = 0;
@@ -96,7 +98,7 @@ int	get_map(char *file, int gnl_calls, t_data *data)
 
 	fd = open(file, O_RDONLY);
 	i = 0;
-	while (i <= gnl_calls + 1)
+	while (i < gnl_calls)
 	{
 		line = get_next_line(fd);
 		i++;
@@ -107,7 +109,7 @@ int	get_map(char *file, int gnl_calls, t_data *data)
 	get_next_line(-1);
 	fd = open(file, O_RDONLY);
 	i = 0;
-	while (i <= gnl_calls + 1)
+	while (i < gnl_calls)
 	{
 		line = get_next_line(fd);
 		i++;

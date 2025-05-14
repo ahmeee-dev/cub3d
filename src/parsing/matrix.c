@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 09:28:36 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/14 10:41:19 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/14 12:28:35 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ void	matrix_population(int *matrix, int fd, int gnl_calls, t_data *data)
 
 	i = 0;
 	j = 0;
-	while (i++ < gnl_calls + 1)
+	while (i++ < gnl_calls)
 		line = get_next_line(fd);
 	while (line[0] == '\n')
 		line = get_next_line(fd);
 	i = 0;
+	ft_printf("x: %d, y: %d \n", data->sizes.map_lenght, data->sizes.map_height);
 	while (line)
 	{
 		i = 0;

@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 10:39:08 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/13 14:02:07 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/14 10:54:02 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,5 @@ int	get_graphics(char *file, t_data *data)
 	}
 	if (i != 6 || result)
 		return (0);	//too much data before the map
-	//ft_printf("%s NT\n%s ST\n%s ET\n%s WT\n%d c\n%d f\n", data->colors.nt, data->colors.st, data->colors.et, data->colors.wt, data->colors.ceiling, data->colors.floor);
-	return (gnl_calls);
+	return (gnl_calls + 1);
 }
