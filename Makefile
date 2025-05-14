@@ -5,7 +5,7 @@
 NAME        = cub3d
 
 # Compiler
-CC          = gcc
+CC          = gcc -fsanitize=address -g
 CFLAGS      = -Wall -Wextra -Werror
 MLX_FLAGS   = -framework OpenGL -framework AppKit
 

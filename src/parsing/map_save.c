@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:25:11 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/14 14:43:36 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/14 15:53:42 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	map_check(int fd, char *line)
 
 	i = 0;
 	player = 0;
+	prev = NULL;
 	next = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -74,6 +75,8 @@ int	map_check(int fd, char *line)
 				player++;
 			i++;
 		}
+		if (prev != NULL)
+			free_function(prev);
 		prev = line;
 		line = next;
 		next = get_next_line(fd);
@@ -94,7 +97,10 @@ void	get_sizes(int fd, char *line, t_data *data)
 	max_lenght = 0;
 	height = 0;
 	while (line[0] == '\n')
+	{
+		free_function(line);
 		line = get_next_line(fd);
+	}
 	while (line != NULL)
 	{
 		i = 0;
@@ -107,6 +113,7 @@ void	get_sizes(int fd, char *line, t_data *data)
 		}
 		if (lenght > max_lenght)
 			max_lenght = lenght;
+		free_function(line);
 		line = get_next_line(fd);
 	}
 	data->sizes.map_height = height;
@@ -119,10 +126,13 @@ int	get_map(char *file, int gnl_calls, t_data *data)
 	char	*line;
 	int	fd;
 
+	line = NULL;
 	fd = open(file, O_RDONLY);
 	i = 0;
 	while (i < gnl_calls)
 	{
+		if (line)
+			free_function(line);
 		line = get_next_line(fd);
 		i++;
 	}
@@ -132,8 +142,10 @@ int	get_map(char *file, int gnl_calls, t_data *data)
 	get_next_line(-1);
 	fd = open(file, O_RDONLY);
 	i = 0;
+	line = NULL;
 	while (i < gnl_calls)
 	{
+		free_function(line);
 		line = get_next_line(fd);
 		i++;
 	}

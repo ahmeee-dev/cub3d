@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/14 13:17:50 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/14 15:41:46 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,4 +144,8 @@ void	matrix_creation(t_data *data, int fd, int gnl_calls);
 int	map_parsing(char *file, t_data *data);
 int	get_graphics(char *file, t_data *data);
 int	get_map(char *file, int gnl_calls, t_data *data);
+
+//Utils
+void	free_function(char *line);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 10:39:08 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/14 13:38:06 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/14 15:43:00 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ int	get_graphics(char *file, t_data *data)
 			result[4] = save_color(&i, &data->colors.ceiling, line);
 		else if (ft_strnstr(line, "f", 1))
 			result[5] = save_color(&i, &data->colors.floor, line);
+		free_function(line);
 		line = get_next_line(fd);
 		if (i < 6)
 			gnl_calls++;
@@ -138,6 +139,5 @@ int	get_graphics(char *file, t_data *data)
 	while (i < 6)
 		if (result[i++] == 1)
 			return (0);	//too much data before the map
-	ft_printf("Ceiling: %d, Floors: %d\nNO: %s, SO: %s\nEA: %s, WE: %s\n", data->colors.ceiling, data->colors.floor, data->colors.nt, data->colors.st, data->colors.et, data->colors.wt);
 	return (gnl_calls + 1);
 }
