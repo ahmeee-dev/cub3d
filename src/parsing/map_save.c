@@ -6,11 +6,42 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:25:11 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/14 12:41:24 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/14 14:43:36 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	is_player(char c)
+{
+	if (c == 'W' || c == 'S' || c == 'E' || c == 'N')
+		return (1);
+	return (0);
+}
+
+// 0 se superato, 1 se fallito
+int	surround_check(char *line, char *prev, char *next, int i)
+{
+	if (i == 0)
+		return (1);
+	if ((line[i - 1] != FLOOR && line[i - 1] != WALL && !is_player(line[i - 1]) && !is_player(line[i - 1])))
+		return (1);
+	if ((line[i + 1] != FLOOR && line[i + 1] != WALL && !is_player(line[i + 1]) && !is_player(line[i + 1])))
+		return (1);
+	if ((prev[i] != WALL && prev[i] != FLOOR && !is_player(prev[i]) && !is_player(prev[i])))
+		return (1);
+	if ((prev[i + 1] != WALL && prev[i + 1] != FLOOR && !is_player(prev[i + 1]) && !is_player(prev[i + 1])))
+		return (1);
+	if ((prev[i - 1] != WALL && prev[i - 1] != FLOOR && !is_player(prev[i - 1]) && !is_player(prev[i - 1])))
+		return (1);
+	if (!next || (next[i] != WALL && next[i] != FLOOR && !is_player(next[i]) && !is_player(next[i])))
+		return (1);
+	if (!next || (next[i + 1] != WALL && next[i + 1] != FLOOR && !is_player(next[i + 1]) && !is_player(next[i + 1])))
+		return (1);
+	if (!next || (next[i - 1] != WALL && next[i - 1] != FLOOR && !is_player(next[i - 1]) && !is_player(next[i - 1])))
+		return (1);
+	return (0);
+}
 
 // da integrare tolleranza per il Player
 int	map_check(int fd, char *line)
@@ -19,8 +50,10 @@ int	map_check(int fd, char *line)
 	char	*prev;
 	int	not_first;
 	char	*next;
+	int	player;
 
 	i = 0;
+	player = 0;
 	next = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -32,31 +65,21 @@ int	map_check(int fd, char *line)
 				not_first++;
 			if (line[i] == FLOOR)
 			{
-				if (i == 0)
+				if (!not_first)
 					return (1);
-				if (line[i - 1] != FLOOR && line[i - 1] != WALL)
-					return (1);
-				if (line[i + 1] != FLOOR && line[i + 1] != WALL)
-					return (1);
-				if (!not_first || (prev[i] != WALL && prev[i] != FLOOR))
-					return (1);
-				if (!not_first || (prev[i + 1] != WALL && prev[i + 1] != FLOOR))
-					return (1);
-				if (!not_first || (prev[i - 1] != WALL && prev[i - 1] != FLOOR))
-					return (1);
-				if (!next || (next[i] != WALL && next[i] != FLOOR))
-					return (1);
-				if (!next || (next[i + 1] != WALL && next[i + 1] != FLOOR))
-					return (1);
-				if (!next || (next[i - 1] != WALL && next[i - 1] != FLOOR))
+				if (surround_check(line, prev, next, i))
 					return (1);
 			}
+			if (line[i] == 'W' || line[i] == 'S' || line[i] == 'N' || line[i] == 'A')
+				player++;
 			i++;
 		}
 		prev = line;
 		line = next;
 		next = get_next_line(fd);
 	}
+	if (player != 1)
+		return (1);
 	return (0);
 }
 
