@@ -6,13 +6,13 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 09:28:36 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/13 15:06:26 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/14 10:19:23 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	matrix_population(int *matrix, int fd, int gnl_calls)
+void	matrix_population(int *matrix, int fd, int gnl_calls, t_data *data)
 {
 	char	*line;
 	int	i;
@@ -25,6 +25,7 @@ void	matrix_population(int *matrix, int fd, int gnl_calls)
 	i = 0;
 	while (line)
 	{
+		i = 0;
 		while (line[i] != '\n' && line[i] != '\0')
 		{
 			if (line[i] == ' ')
@@ -36,16 +37,31 @@ void	matrix_population(int *matrix, int fd, int gnl_calls)
 			i++;
 			j++;
 		}
+		if (line[i] == '\n')
+		{
+			while (i < data->sizes.map_lenght)
+			{
+				matrix[j] = 2;
+				j++;
+				i++;
+			}
+		}
 		line = get_next_line(fd);
 	}
 }
 
 void	matrix_creation(t_data *data, int fd, int gnl_calls)
 {
-	int	i = 0;
-
 	data->matrix = (int *)malloc(sizeof(int) * (data->sizes.map_height * data->sizes.map_lenght));
-	matrix_population(data->matrix, fd, gnl_calls);
+	matrix_population(data->matrix, fd, gnl_calls, data);
+
+	int	i = 0;
+	while (i < data->sizes.map_height * data->sizes.map_lenght)
+	{
+		ft_printf("%d ", data->matrix[i++]);
+		if (i % data->sizes.map_lenght == 0)
+			ft_printf("\n");
+	}
 }
 
 // Problem: the map in the file doesn't have every line filled to the end, that means that I personally have
