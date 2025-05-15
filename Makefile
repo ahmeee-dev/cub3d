@@ -1,62 +1,47 @@
-# **************************************************************************** #
-#                                   VARIABLES                                  #
-# **************************************************************************** #
+NAME			= cub3d
+CC				= gcc
+CFLAGS			= -Wall -Wextra -Werror
 
-NAME        = cub3d
+SRC_DIR			= src/
+RND_DIR			= rendering/
+PRS_DIR			= parsing/
+H_DIR			= includes
+LIBFT_DIR		= libft
+MLX_DIR			= .minilibx/minilibx-linux
 
-# Compiler
-CC          = gcc -fsanitize=address -g
-CFLAGS      = -Wall -Wextra -Werror
-MLX_FLAGS   = -framework OpenGL -framework AppKit
+C_FILES			= main.c
+RND_FILES		= raycaster.c raycaster_utils.c mymlx.c mymlx_utils.c
+PRS_FILES		= map_save.c gfx_save.c matrix.c parsing.c utils.c
 
-# Directories
-CDIR        = src
-HDIR        = includes
-LIBFTDIR    = libft
-MLXDIR      = .minilibx/minilibx_opengl_20191021
+SRCS			= $(C_FILES) $(addprefix $(RND_DIR), $(RND_FILES)) $(addprefix $(PRS_DIR), $(PRS_FILES))
+OBJS			= $(addprefix $(SRC_DIR), $(SRCS:.c=.o))
 
-# Source files (auto-detected)
-SRCS        = $(shell find $(CDIR) -name "*.c")
-OBJS        = $(SRCS:.c=.o)
-
-# Libraries
-MLXLIB      = $(MLXDIR)/libmlx.a
-LIBFTLIB    = $(LIBFTDIR)/libft.a
-
-# **************************************************************************** #
-#                                   RULES                                      #
-# **************************************************************************** #
+MLX_LIB			= $(MLX_DIR)/libmlx.a
+LIBFT_LIB		= $(LIBFT_DIR)/libft.a
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(MLXLIB) $(LIBFTLIB)
-	$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJS) $(MLXLIB) $(LIBFTLIB) -o $(NAME)
+$(NAME): $(OBJS) $(MLX_LIB) $(LIBFT_LIB)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L $(MLX_DIR) -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -L $(LIBFT_DIR) -lft
 
-$(MLXLIB):
-	$(MAKE) -C $(MLXDIR)
+$(MLX_LIB):
+	$(MAKE) -C $(MLX_DIR)
 
-$(LIBFTLIB):
-	$(MAKE) -C $(LIBFTDIR)
+$(LIBFT_LIB):
+	$(MAKE) -C $(LIBFT_DIR)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -I$(HDIR) -I$(LIBFTDIR)/includes -I$(MLXDIR) -c $< -o $@
-
-# **************************************************************************** #
-#                                   CLEANUP                                    #
-# **************************************************************************** #
+$(SRC_DIR)%.o: $(SRC_DIR)%.c $(H_DIR)/cub3d.h
+	$(CC) $(CFLAGS) -I $(H_DIR) -I $(LIBFT_DIR)/includes -I $(MLX_DIR) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
+	$(MAKE) clean -C $(LIBFT_DIR)
 
 fclean: clean
 	rm -f $(NAME)
-
-fclean_mlx:
-	$(MAKE) clean -C $(MLXDIR)
-
-fclean_libft:
-	$(MAKE) fclean -C $(LIBFTDIR)
+	$(MAKE) fclean -C $(LIBFT_DIR)
+	$(MAKE) clean -C $(MLX_DIR)
 
 re: fclean all
 
-.PHONY: all clean fclean re fclean_mlx fclean_libft
+.PHONY: all clean fclean re

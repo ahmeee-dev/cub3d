@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_save.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:25:11 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/14 15:53:42 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/15 08:14:02 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	is_player(char c)
 // 0 se superato, 1 se fallito
 int	surround_check(char *line, char *prev, char *next, int i)
 {
+	printf("%d - %d\n\n", line[i - 1], FLOOR);
 	if (i == 0)
 		return (1);
 	if ((line[i - 1] != FLOOR && line[i - 1] != WALL && !is_player(line[i - 1]) && !is_player(line[i - 1])))
@@ -81,12 +82,13 @@ int	map_check(int fd, char *line)
 		line = next;
 		next = get_next_line(fd);
 	}
+	free_function(prev);
 	if (player != 1)
 		return (1);
 	return (0);
 }
 
-void	get_sizes(int fd, char *line, t_data *data)
+void	get_sizes(int fd, char *line, t_map *map)
 {
 	int	i;
 	int	height;
@@ -116,11 +118,11 @@ void	get_sizes(int fd, char *line, t_data *data)
 		free_function(line);
 		line = get_next_line(fd);
 	}
-	data->sizes.map_height = height;
-	data->sizes.map_lenght = max_lenght;
+	map->sizes.map_height = height;
+	map->sizes.map_lenght = max_lenght;
 }
 
-int	get_map(char *file, int gnl_calls, t_data *data)
+int	get_map(char *file, int gnl_calls, t_map *map)
 {
 	int	i;
 	char	*line;
@@ -149,6 +151,6 @@ int	get_map(char *file, int gnl_calls, t_data *data)
 		line = get_next_line(fd);
 		i++;
 	}
-	get_sizes(fd, line, data);
+	get_sizes(fd, line, map);
 	return (1);
 }

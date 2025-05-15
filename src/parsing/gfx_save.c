@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   gfx_save.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 10:39:08 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/14 15:43:00 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/14 17:49:57 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// 1 is for images, 2 is for colors
+// 1 is for images, 2 is for data
 int	check_safe(char *line, int type)
 {
 	int	j;
-	
+
 	j = 0;
 	while (ft_isalnum(line[j]))
 		j++;
-	while (line[j] == ' ')	
+	while (line[j] == ' ')
 		j++;
 	if (line[j] == '.')
 		j++;
@@ -29,7 +29,7 @@ int	check_safe(char *line, int type)
 
 	while (ft_isalnum(line[j]) || (type == 1 && (line[j] == '_' || line[j] == '.')) || (type == 2 && line[j] == ','))
 		j++;
-	while (line[j] == ' ')	
+	while (line[j] == ' ')
 		j++;
 	if (line[j] == '\n')
 		return (0);
@@ -90,17 +90,17 @@ int	save_image(int *i, char **dest, char *line)
 {
 	line = ft_strstr(line, "./");
 	if (!line)
-		return (1); 
+		return (1);
 	*dest = ft_strtrim(line, "./\n");
 	(*i)++;
 	if (check_safe(line, 1))
-		return (1); 
+		return (1);
 	return (0);
 }
 
 
 //la funzione ignora automaticamente i newline tra le varie linee canoniche
-int	get_graphics(char *file, t_data *data)
+int	get_graphics(char *file, t_map *map)
 {
 	int	fd;
 	char	*line;
@@ -117,17 +117,17 @@ int	get_graphics(char *file, t_data *data)
 	while (line != NULL)
 	{
 		if (ft_strnstr(line, "NO", 2))
-			result[0] = save_image(&i, &data->colors.nt, line); 
+			result[0] = save_image(&i, &map->data.nt, line);
 		else if (ft_strnstr(line, "SO", 2))
-			result[1] = save_image(&i, &data->colors.st, line);
+			result[1] = save_image(&i, &map->data.st, line);
 		else if (ft_strnstr(line, "EA", 2))
-			result[2] = save_image(&i, &data->colors.et, line);
+			result[2] = save_image(&i, &map->data.et, line);
 		else if (ft_strnstr(line, "WE", 2))
-			result[3] = save_image(&i, &data->colors.wt, line);
+			result[3] = save_image(&i, &map->data.wt, line);
 		else if (ft_strnstr(line, "c", 1))
-			result[4] = save_color(&i, &data->colors.ceiling, line);
+			result[4] = save_color(&i, &map->data.ceiling, line);
 		else if (ft_strnstr(line, "f", 1))
-			result[5] = save_color(&i, &data->colors.floor, line);
+			result[5] = save_color(&i, &map->data.floor, line);
 		free_function(line);
 		line = get_next_line(fd);
 		if (i < 6)
@@ -138,6 +138,6 @@ int	get_graphics(char *file, t_data *data)
 	i = 0;
 	while (i < 6)
 		if (result[i++] == 1)
-			return (0);	//too much data before the map
+			return (0);	//too much map before the map
 	return (gnl_calls + 1);
 }

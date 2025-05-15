@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 09:28:36 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/14 15:59:56 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/14 20:27:02 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	matrix_population(int *matrix, int fd, int gnl_calls, t_data *data)
+int	is_player(char c);
+
+void	matrix_population(int *matrix, int fd, int gnl_calls, t_map *map)
 {
 	char	*line;
 	int	i;
@@ -40,15 +42,17 @@ void	matrix_population(int *matrix, int fd, int gnl_calls, t_data *data)
 			if (line[i] == ' ')
 				matrix[j] = 2;
 			else if (line[i] == '0')
-				matrix[j] = 0; 
+				matrix[j] = 0;
 			else if (line[i] == '1')
 				matrix[j] = 1;
+			else if (is_player(line[i]))
+				matrix[j] = (int)line[i];
 			i++;
 			j++;
 		}
 		if (line[i] == '\n' || line[i] == '\0')
 		{
-			while (i < data->sizes.map_lenght)
+			while (i < map->sizes.map_lenght)
 			{
 				matrix[j] = 2;
 				j++;
@@ -60,16 +64,16 @@ void	matrix_population(int *matrix, int fd, int gnl_calls, t_data *data)
 	}
 }
 
-void	matrix_creation(t_data *data, int fd, int gnl_calls)
+void	matrix_creation(t_map *map, int fd, int gnl_calls)
 {
-	data->matrix = (int *)malloc(sizeof(int) * (data->sizes.map_height * data->sizes.map_lenght));
-	matrix_population(data->matrix, fd, gnl_calls, data);
+	map->matrix = (int *)malloc(sizeof(int) * (map->sizes.map_height * map->sizes.map_lenght));
+	matrix_population(map->matrix, fd, gnl_calls, map);
 
 	// int	i = 0;
-	// while (i < data->sizes.map_height * data->sizes.map_lenght)
+	// while (i < map->sizes.map_height * map->sizes.map_lenght)
 	// {
-	// 	ft_printf("%d ", data->matrix[i++]);
-	// 	if (i % data->sizes.map_lenght == 0)
+	// 	ft_printf("%d ", map->matrix[i++]);
+	// 	if (i % map->sizes.map_lenght == 0)
 	// 		ft_printf("\n");
 	// }
 }
