@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 09:28:36 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/14 20:27:02 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/16 10:35:13 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	is_player(char c);
+int		is_player(char c);
 
 void	matrix_population(int *matrix, int fd, int gnl_calls, t_map *map)
 {
 	char	*line;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 1;
 	j = 0;
@@ -66,9 +66,9 @@ void	matrix_population(int *matrix, int fd, int gnl_calls, t_map *map)
 
 void	matrix_creation(t_map *map, int fd, int gnl_calls)
 {
-	map->matrix = (int *)malloc(sizeof(int) * (map->sizes.map_height * map->sizes.map_lenght));
+	map->matrix = (int *)malloc(sizeof(int) * (map->sizes.map_height
+				* map->sizes.map_lenght));
 	matrix_population(map->matrix, fd, gnl_calls, map);
-
 	// int	i = 0;
 	// while (i < map->sizes.map_height * map->sizes.map_lenght)
 	// {
@@ -78,5 +78,7 @@ void	matrix_creation(t_map *map, int fd, int gnl_calls)
 	// }
 }
 
-// Problem: the map in the file doesn't have every line filled to the end, that means that I personally have
-// to check that every line is filled to the end, and, in case, to fill it actively
+// Problem: the map in the file doesn't have every line filled to the end,
+	that means that I personally have
+// to check that every line is filled to the end, and, in case,
+	to fill it actively

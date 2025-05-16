@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gfx_save.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 10:39:08 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/14 17:49:57 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/16 10:33:30 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ int	check_safe(char *line, int type)
 		j++;
 	if (line[j] == '/')
 		j++;
-
-	while (ft_isalnum(line[j]) || (type == 1 && (line[j] == '_' || line[j] == '.')) || (type == 2 && line[j] == ','))
+	while (ft_isalnum(line[j]) || (type == 1 && (line[j] == '_'
+				|| line[j] == '.')) || (type == 2 && line[j] == ','))
 		j++;
 	while (line[j] == ' ')
 		j++;
 	if (line[j] == '\n')
 		return (0);
-	return (1); //error
+	return (1); // error
 }
 
 int	color_value(char *line)
@@ -42,17 +42,16 @@ int	color_value(char *line)
 	int	j;
 
 	value = 0;
-	j = 1; //start directly after element's name
-		value |= (ft_atoi(line + j) << 16);
+	j = 1; // start directly after element's name
+	value |= (ft_atoi(line + j) << 16);
 	while (line[j] != ',')
 		j++;
 	value |= (ft_atoi(line + (++j)) << 8);
-		while (line[j] != ',')
+	while (line[j] != ',')
 		j++;
 	value |= (ft_atoi(line + (++j)));
 	return (value);
 }
-
 
 int	save_color(int *i, int *dest, char *line)
 {
@@ -67,11 +66,12 @@ int	save_color(int *i, int *dest, char *line)
 	j = 1;
 	while (line[j] == ' ')
 		j++;
-	while(line[j] != '\n' && line[j] != ' ' && line[j] != '\0')
+	while (line[j] != '\n' && line[j] != ' ' && line[j] != '\0')
 	{
 		if (ft_isnum(line[j]))
 			check++;
-		if (check >= 1 && check <= 3 && line[j] == ',') //check = 0 non ci sono cifre, check > 3 ce ne sono troppe
+		if (check >= 1 && check <= 3 && line[j] == ',')
+		// check = 0 non ci sono cifre, check > 3 ce ne sono troppe
 		{
 			check = 0;
 			commas++;
@@ -80,7 +80,6 @@ int	save_color(int *i, int *dest, char *line)
 	}
 	if (commas != 2 || check == 0 || check > 3)
 		return (1); //	wrong format
-
 	(*i)++;
 	*dest = color_value(line);
 	return (0);
@@ -98,15 +97,14 @@ int	save_image(int *i, char **dest, char *line)
 	return (0);
 }
 
-
-//la funzione ignora automaticamente i newline tra le varie linee canoniche
+// la funzione ignora automaticamente i newline tra le varie linee canoniche
 int	get_graphics(char *file, t_map *map)
 {
-	int	fd;
+	int		fd;
 	char	*line;
-	int	i;
-	int	gnl_calls;
-	int	result[6];
+	int		i;
+	int		gnl_calls;
+	int		result[6];
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
@@ -138,6 +136,6 @@ int	get_graphics(char *file, t_map *map)
 	i = 0;
 	while (i < 6)
 		if (result[i++] == 1)
-			return (0);	//too much map before the map
+			return (0); // too much map before the map
 	return (gnl_calls + 1);
 }

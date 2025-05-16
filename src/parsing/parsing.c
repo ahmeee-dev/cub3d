@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:25:26 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/14 20:22:24 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/16 10:35:17 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 // 1 = success, 0 = failure
 int	map_parsing(char *file, t_map *map)

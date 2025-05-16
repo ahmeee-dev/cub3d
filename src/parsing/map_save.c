@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_save.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:25:11 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/15 08:14:02 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/16 10:35:03 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	is_player(char c)
 // 0 se superato, 1 se fallito
 int	surround_check(char *line, char *prev, char *next, int i)
 {
-	//printf("%d in %d\n\n", line[i], i);
+	// printf("%d in %d\n\n", line[i], i);
 	if (i == 0)
 		return (1);
 	if (line[i - 1] != '1' && line[i - 1] != '0' && !is_player(line[i - 1]))
@@ -37,9 +37,11 @@ int	surround_check(char *line, char *prev, char *next, int i)
 		return (1);
 	if (!next || (next[i] != '1' && next[i] != '0' && !is_player(next[i])))
 		return (1);
-	if (!next || (next[i + 1] != '1' && next[i + 1] != '0' && !is_player(next[i + 1])))
+	if (!next || (next[i + 1] != '1' && next[i + 1] != '0' && !is_player(next[i
+				+ 1])))
 		return (1);
-	if (!next || (next[i - 1] != '1' && next[i - 1] != '0' && !is_player(next[i - 1])))
+	if (!next || (next[i - 1] != '1' && next[i - 1] != '0' && !is_player(next[i
+				- 1])))
 		return (1);
 	return (0);
 }
@@ -47,11 +49,11 @@ int	surround_check(char *line, char *prev, char *next, int i)
 // da integrare tolleranza per il Player
 int	map_check(int fd, char *line)
 {
-	int	i;
+	int		i;
 	char	*prev;
-	int	not_first;
+	int		not_first;
 	char	*next;
-	int	player;
+	int		player;
 
 	i = 0;
 	player = 0;
@@ -72,7 +74,8 @@ int	map_check(int fd, char *line)
 				if (surround_check(line, prev, next, i))
 					return (1);
 			}
-			if (line[i] == 'W' || line[i] == 'S' || line[i] == 'N' || line[i] == 'A')
+			if (line[i] == 'W' || line[i] == 'S' || line[i] == 'N'
+				|| line[i] == 'A')
 				player++;
 			i++;
 		}
@@ -124,9 +127,9 @@ void	get_sizes(int fd, char *line, t_map *map)
 
 int	get_map(char *file, int gnl_calls, t_map *map)
 {
-	int	i;
+	int		i;
 	char	*line;
-	int	fd;
+	int		fd;
 
 	line = NULL;
 	fd = open(file, O_RDONLY);
