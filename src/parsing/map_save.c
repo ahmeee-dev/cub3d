@@ -25,21 +25,21 @@ int	surround_check(char *line, char *prev, char *next, int i)
 	//printf("%d in %d\n\n", line[i], i);
 	if (i == 0)
 		return (1);
-	if ((line[i - 1] != '1' && line[i - 1] != '0' && !is_player(line[i - 1]) && !is_player(line[i - 1])))
+	if (line[i - 1] != '1' && line[i - 1] != '0' && !is_player(line[i - 1]))
 		return (1);
-	if ((line[i + 1] != '1' && line[i + 1] != '0' && !is_player(line[i + 1]) && !is_player(line[i + 1])))
+	if (line[i + 1] != '1' && line[i + 1] != '0' && !is_player(line[i + 1]))
 		return (1);
-	if ((prev[i] != '1' && prev[i] != '0' && !is_player(prev[i]) && !is_player(prev[i])))
+	if (prev[i] != '1' && prev[i] != '0' && !is_player(prev[i]))
 		return (1);
-	if ((prev[i + 1] != '1' && prev[i + 1] != '0' && !is_player(prev[i + 1]) && !is_player(prev[i + 1])))
+	if (prev[i + 1] != '1' && prev[i + 1] != '0' && !is_player(prev[i + 1]))
 		return (1);
-	if ((prev[i - 1] != '1' && prev[i - 1] != '0' && !is_player(prev[i - 1]) && !is_player(prev[i - 1])))
+	if (prev[i - 1] != '1' && prev[i - 1] != '0' && !is_player(prev[i - 1]))
 		return (1);
-	if (!next || (next[i] != '1' && next[i] != '0' && !is_player(next[i]) && !is_player(next[i])))
+	if (!next || (next[i] != '1' && next[i] != '0' && !is_player(next[i])))
 		return (1);
-	if (!next || (next[i + 1] != '1' && next[i + 1] != '0' && !is_player(next[i + 1]) && !is_player(next[i + 1])))
+	if (!next || (next[i + 1] != '1' && next[i + 1] != '0' && !is_player(next[i + 1])))
 		return (1);
-	if (!next || (next[i - 1] != '1' && next[i - 1] != '0' && !is_player(next[i - 1]) && !is_player(next[i - 1])))
+	if (!next || (next[i - 1] != '1' && next[i - 1] != '0' && !is_player(next[i - 1])))
 		return (1);
 	return (0);
 }
