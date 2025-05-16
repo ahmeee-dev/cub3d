@@ -182,6 +182,7 @@ void	matrix_creation(t_map *map, int fd, int gnl_calls);
 int	map_parsing(char *file, t_map *map);
 int	get_graphics(char *file, t_map *map);
 int	get_map(char *file, int gnl_calls, t_map *map);
+int	is_player(char c);
 
 //Utils
 void	free_function(char *line);

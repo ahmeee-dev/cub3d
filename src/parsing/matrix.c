@@ -69,16 +69,4 @@ void	matrix_creation(t_map *map, int fd, int gnl_calls)
 	map->matrix = (int *)malloc(sizeof(int) * (map->sizes.map_height
 				* map->sizes.map_lenght));
 	matrix_population(map->matrix, fd, gnl_calls, map);
-	// int	i = 0;
-	// while (i < map->sizes.map_height * map->sizes.map_lenght)
-	// {
-	// 	ft_printf("%d ", map->matrix[i++]);
-	// 	if (i % map->sizes.map_lenght == 0)
-	// 		ft_printf("\n");
-	// }
 }
-
-// Problem: the map in the file doesn't have every line filled to the end,
-	that means that I personally have
-// to check that every line is filled to the end, and, in case,
-	to fill it actively

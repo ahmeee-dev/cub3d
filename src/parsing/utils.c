@@ -20,3 +20,10 @@ void	free_function(char *line)
 		line = NULL;
 	}
 }
+
+int	is_player(char c)
+{
+	if (c == 'W' || c == 'S' || c == 'E' || c == 'N')
+		return (1);
+	return (0);
+}
