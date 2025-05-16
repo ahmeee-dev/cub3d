@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/15 07:49:46 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/16 07:47:03 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,19 @@
 //FLOOR == 0
 //BLANK == 2
 
-# define SCREEN_WIDTH 2500
-# define SCREEN_HEIGHT 1900
+# define SCREEN_WIDTH 1280
+# define SCREEN_HEIGHT 720
+
 # define CELL_SIZE 64
 # define FOV 60.0f
+# define VIEW_DISTANCE 1500.0f
+# define RENDER_SCALE 2 // con 1 è full quality, con 2 1/2 quality per grandi distanze
+# define LOD_THRESHOLD 8.0f //distanza da cui switchare la qualità bassa
+# define TARGET_FPS 120.0f
+# define FRAME_TIME (1.0f / TARGET_FPS)
+
+# define ROTATION_SPEED 0.05f
+# define MOVE_SPEED 0.1f
 
 # include "../libft/includes/libft.h"
 # include "../.minilibx/minilibx-linux/mlx.h"
@@ -35,6 +44,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <sys/time.h>
 
 //Mlx structures
 typedef struct s_size
@@ -138,21 +148,32 @@ typedef struct s_cub
 	t_picture	pic;
 	t_map		map;
 	t_raycaster	raycaster;
+	int			frame_count;
+	double		last_time;
+	double		fps;
+	double		fps_accum;
 }	t_cub;
 
 void	raycaster_init(t_cub *cub);
 
 void	mymlx_pixel_put(t_image *img, int x, int y, int color);
-unsigned int darken_color(unsigned int color, float distance);
 int		render_scene(t_cub *cub);
 void	cast_ray(t_ray *ray, t_player *p, t_map *map, int x);
 void	map_plot(t_cub *cub);
 int		mymlx_render(t_cub *cub);
 int		mymlx_exit(t_cub *cub);
-void	mymlx_init(t_cub *cub, int argc, char *argv[]);
+void	mymlx_init(t_cub *cub, char *argv[]);
 int		mymlx_destroy(t_cub *cub);
 int		key_hook(int keycode, t_cub *cub);
 int		main_loop(t_cub *cub);
+void    draw_vertical_line(t_image *img, int x, int y_start, int y_end, unsigned int color);
+void    draw_horizontal_line(t_image *img, int y, int x_start, int x_end, unsigned int color);
+void    fill_rectangle(t_image *img, int x, int y, int width, int height, unsigned int color);
+
+// Funzioni per FPS counter
+double	get_time();
+void	init_fps_counter(t_cub *cub);
+void	update_fps_counter(t_cub *cub);
 
 //Matrix-realted functions
 void	matrix_creation(t_map *map, int fd, int gnl_calls);
