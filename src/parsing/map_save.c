@@ -22,24 +22,24 @@ int	is_player(char c)
 // 0 se superato, 1 se fallito
 int	surround_check(char *line, char *prev, char *next, int i)
 {
-	printf("%d - %d\n\n", line[i - 1], FLOOR);
+	//printf("%d in %d\n\n", line[i], i);
 	if (i == 0)
 		return (1);
-	if ((line[i - 1] != FLOOR && line[i - 1] != WALL && !is_player(line[i - 1]) && !is_player(line[i - 1])))
+	if ((line[i - 1] != '1' && line[i - 1] != '0' && !is_player(line[i - 1]) && !is_player(line[i - 1])))
 		return (1);
-	if ((line[i + 1] != FLOOR && line[i + 1] != WALL && !is_player(line[i + 1]) && !is_player(line[i + 1])))
+	if ((line[i + 1] != '1' && line[i + 1] != '0' && !is_player(line[i + 1]) && !is_player(line[i + 1])))
 		return (1);
-	if ((prev[i] != WALL && prev[i] != FLOOR && !is_player(prev[i]) && !is_player(prev[i])))
+	if ((prev[i] != '1' && prev[i] != '0' && !is_player(prev[i]) && !is_player(prev[i])))
 		return (1);
-	if ((prev[i + 1] != WALL && prev[i + 1] != FLOOR && !is_player(prev[i + 1]) && !is_player(prev[i + 1])))
+	if ((prev[i + 1] != '1' && prev[i + 1] != '0' && !is_player(prev[i + 1]) && !is_player(prev[i + 1])))
 		return (1);
-	if ((prev[i - 1] != WALL && prev[i - 1] != FLOOR && !is_player(prev[i - 1]) && !is_player(prev[i - 1])))
+	if ((prev[i - 1] != '1' && prev[i - 1] != '0' && !is_player(prev[i - 1]) && !is_player(prev[i - 1])))
 		return (1);
-	if (!next || (next[i] != WALL && next[i] != FLOOR && !is_player(next[i]) && !is_player(next[i])))
+	if (!next || (next[i] != '1' && next[i] != '0' && !is_player(next[i]) && !is_player(next[i])))
 		return (1);
-	if (!next || (next[i + 1] != WALL && next[i + 1] != FLOOR && !is_player(next[i + 1]) && !is_player(next[i + 1])))
+	if (!next || (next[i + 1] != '1' && next[i + 1] != '0' && !is_player(next[i + 1]) && !is_player(next[i + 1])))
 		return (1);
-	if (!next || (next[i - 1] != WALL && next[i - 1] != FLOOR && !is_player(next[i - 1]) && !is_player(next[i - 1])))
+	if (!next || (next[i - 1] != '1' && next[i - 1] != '0' && !is_player(next[i - 1]) && !is_player(next[i - 1])))
 		return (1);
 	return (0);
 }
@@ -63,9 +63,9 @@ int	map_check(int fd, char *line)
 		not_first = 0;
 		while (line[i] != '\n' && line[i] != '\0')
 		{
-			if (line[i] == WALL)
+			if (line[i] == '1')
 				not_first++;
-			if (line[i] == FLOOR)
+			if (line[i] == '0')
 			{
 				if (!not_first)
 					return (1);
