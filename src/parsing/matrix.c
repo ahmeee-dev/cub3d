@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 09:28:36 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/19 11:32:03 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:48:30 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	matrix_population(int *matrix, int fd, int gnl_calls, t_map *map)
 	i = 0;
 	while (line)
 	{
-		matrix_helper(line, matrix, &j);
+		matrix_helper(line, matrix, &j, map);
 		free_function(line);
 		line = get_next_line(fd);
 	}

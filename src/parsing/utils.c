@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 15:39:28 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/19 11:32:18 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:50:12 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,17 @@ int	graphics_helper(char *line, int *gnl_calls, int *result, t_map *map)
 	while (line != NULL)
 	{
 		if (ft_strnstr(line, "NO", 2))
-			result[0] = save_image(&i, &map->data.nt, line);
+			result[1] = save_image(&i, &map->data.nt, line);
 		else if (ft_strnstr(line, "SO", 2))
-			result[1] = save_image(&i, &map->data.st, line);
+			result[2] = save_image(&i, &map->data.st, line);
 		else if (ft_strnstr(line, "EA", 2))
-			result[2] = save_image(&i, &map->data.et, line);
+			result[3] = save_image(&i, &map->data.et, line);
 		else if (ft_strnstr(line, "WE", 2))
-			result[3] = save_image(&i, &map->data.wt, line);
+			result[4] = save_image(&i, &map->data.wt, line);
 		else if (ft_strnstr(line, "c", 1))
-			result[4] = save_color(&i, &map->data.ceiling, line);
+			result[5] = save_color(&i, &map->data.ceiling, line);
 		else if (ft_strnstr(line, "f", 1))
-			result[5] = save_color(&i, &map->data.floor, line);
+			result[6] = save_color(&i, &map->data.floor, line);
 		free_function(line);
 		line = get_next_line(result[0]);
 		if (i < 6)
@@ -78,32 +78,31 @@ int	graphics_helper(char *line, int *gnl_calls, int *result, t_map *map)
 	return (i);
 }
 
-
-void	matrix_helper(char *line, int *matrix, int *j)
+void	matrix_helper(char *line, int *matrix, int *j, t_map *map)
 {
 	int	i;
 
 	i = 0;
-		while (line[i] != '\n' && line[i] != '\0')
+	while (line[i] != '\n' && line[i] != '\0')
+	{
+		if (line[i] == ' ')
+			matrix[*j] = 2;
+		else if (line[i] == '0')
+			matrix[*j] = 0;
+		else if (line[i] == '1')
+			matrix[*j] = 1;
+		else if (is_player(line[i]))
+			matrix[*j] = (int)line[i];
+		i++;
+		(*j)++;
+	}
+	if (line[i] == '\n' || line[i] == '\0')
+	{
+		while (i < map->sizes.map_lenght)
 		{
-			if (line[i] == ' ')
-				matrix[*j] = 2;
-			else if (line[i] == '0')
-				matrix[*j] = 0;
-			else if (line[i] == '1')
-				matrix[*j] = 1;
-			else if (is_player(line[i]))
-				matrix[*j] = (int)line[i];
+			matrix[*j] = 2;
+			(*j)++;
 			i++;
-			j++;
 		}
-		if (line[i] == '\n' || line[i] == '\0')
-		{
-			while (i < map->sizes.map_lenght)
-			{
-				matrix[*j] = 2;
-				j++;
-				i++;
-			}
-		}
+	}
 }

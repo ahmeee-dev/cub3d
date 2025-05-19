@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/19 11:31:23 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:36:14 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,11 +183,14 @@ int	map_parsing(char *file, t_map *map);
 int	get_graphics(char *file, t_map *map);
 int	get_map(char *file, int gnl_calls, t_map *map);
 int	is_player(char c);
+int	save_image(int *i, char **dest, char *line);
+int	save_color(int *i, int *dest, char *line);
+
 
 //Utils
 void	free_function(char *line);
 int	color_helper(char *line, int j);
 int	graphics_helper(char *line, int *gnl_calls, int *result, t_map *map);
-int	matrix_helper(char *line, int *matrix, int *j);
+void	matrix_helper(char *line, int *matrix, int *j, t_map *map);
 
 #endif
