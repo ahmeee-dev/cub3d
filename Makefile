@@ -11,7 +11,7 @@ MLX_DIR			= .minilibx/minilibx-linux
 
 C_FILES			= main.c
 RND_FILES		= raycaster.c raycaster_utils.c mymlx.c mymlx_utils.c fps.c
-PRS_FILES		= map_save.c gfx_save.c matrix.c parsing.c utils.c
+PRS_FILES		= map_save.c gfx_save.c matrix.c parsing.c general_utils.c map_utils.c
 
 SRCS			= $(C_FILES) $(addprefix $(RND_DIR), $(RND_FILES)) $(addprefix $(PRS_DIR), $(PRS_FILES))
 OBJS			= $(addprefix $(SRC_DIR), $(SRCS:.c=.o))

@@ -6,7 +6,7 @@
 /*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/19 11:36:14 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/05/19 12:45:53 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,7 @@ int	get_map(char *file, int gnl_calls, t_map *map);
 int	is_player(char c);
 int	save_image(int *i, char **dest, char *line);
 int	save_color(int *i, int *dest, char *line);
+int	surround_check(char *line, char *prev, char *next, int i);
 
 
 //Utils
@@ -192,5 +193,8 @@ void	free_function(char *line);
 int	color_helper(char *line, int j);
 int	graphics_helper(char *line, int *gnl_calls, int *result, t_map *map);
 void	matrix_helper(char *line, int *matrix, int *j, t_map *map);
+int	check_helper(char *line, char *prev, char *next, int *player);
+void	sizes_helper(char *line, int fd, t_map *map);
+char	*gnl_helper(char *line, int gnl_calls, int fd);
 
 #endif
