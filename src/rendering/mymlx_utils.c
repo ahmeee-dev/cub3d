@@ -6,12 +6,23 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:08 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/15 20:41:53 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:30:09 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 #include <stdlib.h>
+
+void	load_texture(t_cub *cub, t_image *img, char *path)
+{
+	img->p = mlx_xpm_file_to_image(cub->p, path, &img->size.width, &img->size.height);
+	if (!img->p)
+	{
+		ft_printf("Error: cannot load xpm!\n");
+		mymlx_exit(cub);
+	}
+	img->addr = mlx_get_data_addr(img->p, &img->bits_pp, &img->lenght, &img->endian);
+}
 
 void	mymlx_init(t_cub *cub, char *argv[])
 {
@@ -32,6 +43,12 @@ void	mymlx_init(t_cub *cub, char *argv[])
 						&cub->pic.img.lenght, &cub->pic.img.endian);
 	cub->pic.img.size.width = SCREEN_WIDTH;
 	cub->pic.img.size.height = SCREEN_HEIGHT;
+
+	load_texture(cub, &cub->textures.wall.north, cub->map.data.nt);
+	load_texture(cub, &cub->textures.wall.south, cub->map.data.st);
+	load_texture(cub, &cub->textures.wall.east, cub->map.data.et);
+	load_texture(cub, &cub->textures.wall.west, cub->map.data.wt);
+
 	raycaster_init(cub);
 	init_fps_counter(cub);
 	mlx_do_key_autorepeaton(cub->p);
@@ -42,6 +59,10 @@ int	mymlx_destroy(t_cub *cub)
 	if (cub)
 	{
 		mlx_destroy_image(cub->p, cub->pic.img.p);
+		mlx_destroy_image(cub->p, cub->textures.wall.east.p);
+		mlx_destroy_image(cub->p, cub->textures.wall.west.p);
+		mlx_destroy_image(cub->p, cub->textures.wall.south.p);
+		mlx_destroy_image(cub->p, cub->textures.wall.north.p);
 		mlx_destroy_window(cub->p, cub->pic.win.p);
 		free (cub->raycaster.rays);
 		free (cub->p);

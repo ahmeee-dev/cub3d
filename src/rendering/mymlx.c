@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:01 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/15 19:52:09 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:30:40 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int	mymlx_render(t_cub *cub)
 {
 	ft_bzero(cub->pic.img.addr, SCREEN_WIDTH * SCREEN_HEIGHT * \
 			(cub->pic.img.bits_pp / 8));
-	// minimap_plot(cub);
 	mlx_put_image_to_window(cub->p, cub->pic.win.p, \
 							cub->pic.img.p, 0, 0);
 	return (0);

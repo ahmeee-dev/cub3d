@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/19 12:45:53 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/05/19 10:49:21 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,17 +142,33 @@ typedef struct s_raycaster
 	t_ray		*rays;
 }	t_raycaster;
 
+typedef struct s_wall
+{
+	t_image	north;
+	t_image	south;
+	t_image	west;
+	t_image	east;
+}	t_wall;
+
+typedef struct s_textures
+{
+	t_wall	wall;
+}	t_textures;
+
+
 typedef struct s_cub
 {
 	void		*p;
 	t_picture	pic;
 	t_map		map;
 	t_raycaster	raycaster;
+	t_textures	textures;
 	int			frame_count;
 	double		last_time;
 	double		fps;
 	double		fps_accum;
 }	t_cub;
+
 
 void	raycaster_init(t_cub *cub);
 
