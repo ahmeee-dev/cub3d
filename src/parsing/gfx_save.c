@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gfx_save.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 10:39:08 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/16 10:33:30 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:06:36 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,28 +55,13 @@ int	color_value(char *line)
 int	save_color(int *i, int *dest, char *line)
 {
 	int	j;
-	int	check;
-	int	commas;
 
 	if (check_safe(line, 2))
 		return (1);
-	check = 0;
-	commas = 0;
 	j = 1;
 	while (line[j] == ' ')
 		j++;
-	while (line[j] != '\n' && line[j] != ' ' && line[j] != '\0')
-	{
-		if (ft_isnum(line[j]))
-			check++;
-		if (check >= 1 && check <= 3 && line[j] == ',')
-		{
-			check = 0;
-			commas++;
-		}
-		j++;
-	}
-	if (commas != 2 || check == 0 || check > 3)
+	if (color_helper(line, j))
 		return (1);
 	(*i)++;
 	*dest = color_value(line);
