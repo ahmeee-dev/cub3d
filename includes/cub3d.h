@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/16 07:47:03 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/19 08:45:43 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 # define CELL_SIZE 64
 # define FOV 60.0f
-# define VIEW_DISTANCE 1500.0f
+# define VIEW_DISTANCE 15.0f
 # define RENDER_SCALE 2 // con 1 è full quality, con 2 1/2 quality per grandi distanze
 # define LOD_THRESHOLD 8.0f //distanza da cui switchare la qualità bassa
 # define TARGET_FPS 120.0f

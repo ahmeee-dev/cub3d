@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:20 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/16 07:45:57 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/19 08:46:12 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	render_loop(t_cub *cub)
 		return (0);
 	}
 	last_frame_time = current_time;
-	printf("Player pos: [x: %f][y: %f]\n", cub->raycaster.player.pos.x, cub->raycaster.player.pos.y);
+	// printf("Player pos: [x: %f][y: %f]\n", cub->raycaster.player.pos.x, cub->raycaster.player.pos.y);
 	return (render_scene(cub));
 }
 
