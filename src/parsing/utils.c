@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 15:39:28 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/19 11:21:04 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:32:18 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	graphics_helper(char *line, int *gnl_calls, int *result, t_map *map)
 {
 	int	i;
 
-	i = 0
+	i = 0;
 	while (line != NULL)
 	{
 		if (ft_strnstr(line, "NO", 2))
@@ -71,9 +71,39 @@ int	graphics_helper(char *line, int *gnl_calls, int *result, t_map *map)
 		else if (ft_strnstr(line, "f", 1))
 			result[5] = save_color(&i, &map->data.floor, line);
 		free_function(line);
-		line = get_next_line(fd);
+		line = get_next_line(result[0]);
 		if (i < 6)
 			(*gnl_calls)++;
 	}
 	return (i);
+}
+
+
+void	matrix_helper(char *line, int *matrix, int *j)
+{
+	int	i;
+
+	i = 0;
+		while (line[i] != '\n' && line[i] != '\0')
+		{
+			if (line[i] == ' ')
+				matrix[*j] = 2;
+			else if (line[i] == '0')
+				matrix[*j] = 0;
+			else if (line[i] == '1')
+				matrix[*j] = 1;
+			else if (is_player(line[i]))
+				matrix[*j] = (int)line[i];
+			i++;
+			j++;
+		}
+		if (line[i] == '\n' || line[i] == '\0')
+		{
+			while (i < map->sizes.map_lenght)
+			{
+				matrix[*j] = 2;
+				j++;
+				i++;
+			}
+		}
 }
