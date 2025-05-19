@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
+/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/19 11:04:33 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/05/19 11:19:14 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,5 +187,6 @@ int	is_player(char c);
 //Utils
 void	free_function(char *line);
 int	color_helper(char *line, int j);
+int	graphics_helper(char *line, int *gnl_calls, int *result);
 
 #endif
