@@ -226,7 +226,7 @@ static void render_column(t_cub *cub, int x,
 		{
 			draw_vertical_line(&cub->pic.img, x + i,
 				0, ray->draw_start - 1, ceiling_color);
-			draw_textured_column(cub, &cub->raycaster.rays[x + i], x + i);
+			draw_textured_column(cub, ray, x + i);
 			draw_vertical_line(&cub->pic.img, x + i,
 				ray->draw_end + 1, SCREEN_HEIGHT - 1, floor_color);
 			i++;

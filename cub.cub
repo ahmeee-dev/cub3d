@@ -2,6 +2,9 @@ NO ./textures/Wall/wall.xpm
 SO ./textures/Wall/wall.xpm
 WE ./textures/Wall/wall.xpm
 EA ./textures/Wall/wall.xpm
+
+
+
 f 220,100,0
 c 225,30,0
 
