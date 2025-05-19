@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 15:39:28 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/19 11:19:24 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:21:04 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	color_helper(char *line, int j)
 	return (0);
 }
 
-int	graphics_helper(char *line, int *gnl_calls, int *result)
+int	graphics_helper(char *line, int *gnl_calls, int *result, t_map *map)
 {
 	int	i;
 

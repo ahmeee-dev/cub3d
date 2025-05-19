@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 10:39:08 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/19 11:19:42 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:21:13 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	get_graphics(char *file, t_map *map)
 		return (0);
 	gnl_calls = 1;
 	line = get_next_line(fd);
-	i = graphics_helper(line, &gnl_calls, result);
+	i = graphics_helper(line, &gnl_calls, result, map);
 	if (i != 6)
 		return (0);
 	i = 0;
