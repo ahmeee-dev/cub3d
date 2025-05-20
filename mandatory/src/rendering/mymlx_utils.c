@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:08 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/19 11:30:09 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/20 09:38:00 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	mymlx_init(t_cub *cub, char *argv[])
 	load_texture(cub, &cub->textures.wall.south, cub->map.data.st);
 	load_texture(cub, &cub->textures.wall.east, cub->map.data.et);
 	load_texture(cub, &cub->textures.wall.west, cub->map.data.wt);
+
+	cub->keys = (t_keys){0, 0, 0, 0, 0, 0};
 
 	raycaster_init(cub);
 	init_fps_counter(cub);

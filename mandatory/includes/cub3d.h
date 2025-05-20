@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/19 10:49:21 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/20 09:48:38 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@
 //FLOOR == 0
 //BLANK == 2
 
-# define SCREEN_WIDTH 1280
-# define SCREEN_HEIGHT 720
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1080
 
 # define CELL_SIZE 64
 # define FOV 60.0f
 # define VIEW_DISTANCE 15.0f
 # define RENDER_SCALE 2 // con 1 è full quality, con 2 1/2 quality per grandi distanze
-# define LOD_THRESHOLD 8.0f //distanza da cui switchare la qualità bassa
-# define TARGET_FPS 120.0f
+# define LOD_THRESHOLD 1.0f //distanza da cui switchare la qualità bassa
+# define TARGET_FPS 60.0f
 # define FRAME_TIME (1.0f / TARGET_FPS)
 
-# define ROTATION_SPEED 0.05f
-# define MOVE_SPEED 0.1f
+# define ROTATION_SPEED 0.1f
+# define MOVE_SPEED 0.2f
 
 # include "../libft/includes/libft.h"
 # include "../.minilibx/minilibx-linux/mlx.h"
@@ -155,6 +155,15 @@ typedef struct s_textures
 	t_wall	wall;
 }	t_textures;
 
+typedef struct s_keys
+{
+	int	w;
+	int	a;
+	int	s;
+	int	d;
+	int	left;
+	int	right;
+}	t_keys;
 
 typedef struct s_cub
 {
@@ -163,6 +172,7 @@ typedef struct s_cub
 	t_map		map;
 	t_raycaster	raycaster;
 	t_textures	textures;
+	t_keys		keys;
 	int			frame_count;
 	double		last_time;
 	double		fps;
@@ -172,19 +182,21 @@ typedef struct s_cub
 
 void	raycaster_init(t_cub *cub);
 
-void	mymlx_pixel_put(t_image *img, int x, int y, int color);
+void		mymlx_pixel_put(t_image *img, int x, int y, int color);
 int		render_scene(t_cub *cub);
-void	cast_ray(t_ray *ray, t_player *p, t_map *map, int x);
-void	map_plot(t_cub *cub);
+void		cast_ray(t_ray *ray, t_player *p, t_map *map, int x);
+void		map_plot(t_cub *cub);
 int		mymlx_render(t_cub *cub);
 int		mymlx_exit(t_cub *cub);
-void	mymlx_init(t_cub *cub, char *argv[]);
+void		mymlx_init(t_cub *cub, char *argv[]);
 int		mymlx_destroy(t_cub *cub);
-int		key_hook(int keycode, t_cub *cub);
+void		key_handler(t_cub *cub);
 int		main_loop(t_cub *cub);
-void    draw_vertical_line(t_image *img, int x, int y_start, int y_end, unsigned int color);
-void    draw_horizontal_line(t_image *img, int y, int x_start, int x_end, unsigned int color);
-void    fill_rectangle(t_image *img, int x, int y, int width, int height, unsigned int color);
+void		draw_vertical_line(t_image *img, int x, int y_start, int y_end, unsigned int color);
+void		draw_horizontal_line(t_image *img, int y, int x_start, int x_end, unsigned int color);
+void		fill_rectangle(t_image *img, int x, int y, int width, int height, unsigned int color);
+int		key_press(int keycode, t_cub *cub);
+int		key_release(int keycode, t_cub *cub);
 
 // Funzioni per FPS counter
 double	get_time();

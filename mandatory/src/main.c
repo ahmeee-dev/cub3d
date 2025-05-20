@@ -6,17 +6,18 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:20 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/19 08:46:12 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/20 09:41:17 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-int	render_loop(t_cub *cub)
+# define LEFT 0
+# define RIGHT 1
+int render_loop(t_cub *cub)
 {
-	static double last_frame_time = 0.0;
-	double	current_time;
-	double	delta_time;
+	static double	last_frame_time = 0.0;
+	double		current_time;
+	double		delta_time;
 
 	current_time = get_time();
 	delta_time = current_time - last_frame_time;
@@ -27,9 +28,10 @@ int	render_loop(t_cub *cub)
 		return (0);
 	}
 	last_frame_time = current_time;
-	// printf("Player pos: [x: %f][y: %f]\n", cub->raycaster.player.pos.x, cub->raycaster.player.pos.y);
+	key_handler(cub);
 	return (render_scene(cub));
 }
+
 
 int	main(int argc, char **argv)
 {
@@ -53,7 +55,8 @@ int	main(int argc, char **argv)
 	// }
 	// ft_printf("\n");
 
-	mlx_hook(cub.pic.win.p, 2, 1L << 0, key_hook, &cub);
+	mlx_hook(cub.pic.win.p, 2, 1L << 0, key_press, &cub);
+	mlx_hook(cub.pic.win.p, 3, 1L << 1, key_release, &cub);
 	mlx_hook(cub.pic.win.p, 17, 0, mymlx_exit, &cub);
 	mlx_loop_hook(cub.p, render_loop, &cub);
 
