@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 08:21:02 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 09:47:28 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:36:30 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #define MINIMAP_RIGHT_MARGIN 10
 #define MINIMAP_OFFSET_Y 10
 
-#define MINIMAP_CELL_SIZE 25
+#define MINIMAP_CELL_SIZE 12
 #define MINIMAP_PLAYER_SIZE 8
 
 #define MINIMAP_WALL_COLOR 0x333333

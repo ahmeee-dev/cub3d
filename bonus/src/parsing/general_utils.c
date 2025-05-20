@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 15:39:28 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/20 11:08:16 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:32:51 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	matrix_helper(char *line, int *matrix, int *j, t_map *map)
 			matrix[*j] = 0;
 		else if (line[i] == '1')
 			matrix[*j] = 1;
+		else if (line[i] == 'D')
+			matrix[*j] = 3;
 		else if (is_player(line[i]))
 			matrix[*j] = (int)line[i];
 		i++;
