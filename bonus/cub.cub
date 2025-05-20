@@ -1,10 +1,10 @@
 WA ./textures/Wall/wall.xpm
 G1 ./textures/Gun/gun_fire.xpm
-G2 ./textures/Gun/gun_no_fire.xpm
+G2 ./textures/Gun/gun_nofire.xpm
 DO ./textures/Door/door.xpm
 C1 ./textures/Ceiling/ceiling_light.xpm
-C2 ./textures/Ceiling/ceiling_no_light.xpm
-C3 ./textures/Ceiling/ceiling_no_rugg.xpm
+C2 ./textures/Ceiling/ceiling_nolight.xpm
+C3 ./textures/Ceiling/ceiling_norugg.xpm
 HA ./textures/Hand/hand.xpm
 F1 ./textures/Floor/floor_1_lume.xpm
 F2 ./textures/Floor/floor_1.xpm

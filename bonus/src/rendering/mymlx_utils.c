@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:08 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 11:07:27 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:00:37 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ void	mymlx_init(t_cub *cub, char *argv[])
 {
 	if (!map_parsing(argv[1], &cub->map))
 	{
+
 		ft_printf("Error: Invalid map file\n");
 		exit (EXIT_FAILURE);
 	}
+
 	cub->p = NULL;
 	cub->pic.img.p = NULL;
 	cub->pic.win.p = NULL;
@@ -45,9 +47,12 @@ void	mymlx_init(t_cub *cub, char *argv[])
 	cub->pic.img.size.height = SCREEN_HEIGHT;
 
 	load_texture(cub, &cub->textures.wall, cub->map.data.wall);
-	load_texture(cub, &cub->textures.door, cub->map.data.door);
 	load_texture(cub, &cub->textures.gun1, cub->map.data.gun1);
 	load_texture(cub, &cub->textures.gun2, cub->map.data.gun2);
+	load_texture(cub, &cub->textures.door, cub->map.data.door);
+	load_texture(cub, &cub->textures.ceiling1, cub->map.data.ceiling1);
+	load_texture(cub, &cub->textures.ceiling2, cub->map.data.ceiling2);
+	load_texture(cub, &cub->textures.ceiling3, cub->map.data.ceiling3);
 	load_texture(cub, &cub->textures.hand, cub->map.data.hand);
 	load_texture(cub, &cub->textures.floor1, cub->map.data.floor1);
 	load_texture(cub, &cub->textures.floor2, cub->map.data.floor1);
@@ -57,9 +62,6 @@ void	mymlx_init(t_cub *cub, char *argv[])
 	load_texture(cub, &cub->textures.floor6, cub->map.data.floor1);
 	load_texture(cub, &cub->textures.floor7, cub->map.data.floor1);
 	load_texture(cub, &cub->textures.floor8, cub->map.data.floor1);
-	load_texture(cub, &cub->textures.ceiling1, cub->map.data.ceiling1);
-	load_texture(cub, &cub->textures.ceiling2, cub->map.data.ceiling2);
-	load_texture(cub, &cub->textures.ceiling3, cub->map.data.ceiling3);
 
 	raycaster_init(cub);
 	init_fps_counter(cub);

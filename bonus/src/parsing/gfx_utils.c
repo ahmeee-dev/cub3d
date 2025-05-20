@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gfx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 10:38:36 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/20 13:38:49 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/05/20 11:59:51 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	first_half(char *line, int *result, t_map *map, int *i)
 	else if (ft_strnstr(line, "G1", 2))
 		result[2] = save_image(i, &map->data.gun1, line);
 	else if (ft_strnstr(line, "G2", 2))
-		result[3] = save_image(i, &map->data.gun1, line);
+		result[3] = save_image(i, &map->data.gun2, line);
 	else if (ft_strnstr(line, "DO", 2))
 		result[4] = save_image(i, &map->data.door, line);
 	else if (ft_strnstr(line, "C1", 2))
