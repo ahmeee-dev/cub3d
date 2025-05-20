@@ -1,14 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mymlx.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/20 16:00:06 by apintaur          #+#    #+#             */
+/*   Updated: 2025/05/20 16:03:55 by apintaur         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
-# define LEFT 0
-# define RIGHT 1
-
-void	check_collisions(t_cub *cub, t_2fpoint new_pos, t_2fpoint old_pos);
+#define LEFT 0
+#define RIGHT 1
 
 void	update_dir(t_cub *cub, int type)
 {
-	float	old_dir;
-	float	old_plane;
+	float		old_dir;
+	float		old_plane;
 	t_2fpoint	*dir;
 	t_2fpoint	*plane;
 
@@ -18,17 +28,17 @@ void	update_dir(t_cub *cub, int type)
 	plane = &cub->raycaster.player.plane;
 	if (type == LEFT)
 	{
-		dir->x = dir->x * cos(-ROTATION_SPEED) - dir->y * sin(-ROTATION_SPEED);
-		dir->y = old_dir * sin(-ROTATION_SPEED) + dir->y * cos(-ROTATION_SPEED);
-		plane->x = plane->x * cos(-ROTATION_SPEED) - plane->y * sin(-ROTATION_SPEED);
-		plane->y = old_plane * sin(-ROTATION_SPEED) + plane->y * cos(-ROTATION_SPEED);
+		dir->x = dir->x * cos(-ROT_SPD) - dir->y * sin(-ROT_SPD);
+		dir->y = old_dir * sin(-ROT_SPD) + dir->y * cos(-ROT_SPD);
+		plane->x = plane->x * cos(-ROT_SPD) - plane->y * sin(-ROT_SPD);
+		plane->y = old_plane * sin(-ROT_SPD) + plane->y * cos(-ROT_SPD);
 	}
 	else if (type == RIGHT)
 	{
-		dir->x = dir->x * cos(ROTATION_SPEED) - dir->y * sin(ROTATION_SPEED);
-		dir->y = old_dir * sin(ROTATION_SPEED) + dir->y * cos(ROTATION_SPEED);
-		plane->x = plane->x * cos(ROTATION_SPEED) - plane->y * sin(ROTATION_SPEED);
-		plane->y = old_plane * sin(ROTATION_SPEED) + plane->y * cos(ROTATION_SPEED);
+		dir->x = dir->x * cos(ROT_SPD) - dir->y * sin(ROT_SPD);
+		dir->y = old_dir * sin(ROT_SPD) + dir->y * cos(ROT_SPD);
+		plane->x = plane->x * cos(ROT_SPD) - plane->y * sin(ROT_SPD);
+		plane->y = old_plane * sin(ROT_SPD) + plane->y * cos(ROT_SPD);
 	}
 }
 
@@ -106,7 +116,6 @@ void	key_handler(t_cub *cub)
 	check_collisions(cub, new_pos, cub->raycaster.player.pos);
 }
 
-
 int	mymlx_render(t_cub *cub)
 {
 	ft_bzero(cub->pic.img.addr, SCREEN_WIDTH * SCREEN_HEIGHT * \
@@ -121,7 +130,6 @@ int	mymlx_exit(t_cub *cub)
 	exit(mymlx_destroy(cub));
 }
 
-
 void	mymlx_pixel_put(t_image *img, int x, int y, int color)
 {
 	char	*tmp_addr;
@@ -133,6 +141,3 @@ void	mymlx_pixel_put(t_image *img, int x, int y, int color)
 		*((unsigned int *)tmp_addr) = color;
 	}
 }
-
-
-
