@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 10:38:36 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/20 11:08:05 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:56:58 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ int	graphics_helper(char *line, int *gnl_calls, int *result, t_map *map)
 			result[15] = save_image(&i, &map->data.floor7, line);
 		else if (ft_strnstr(line, "F8", 1))
 			result[16] = save_image(&i, &map->data.floor8, line);
-		else if (ft_strnstr(line, "F9", 1))
-			result[17] = save_image(&i, &map->data.floor9, line);
 		free_function(line);
 		line = get_next_line(result[0]);
 		if (i < 17)
