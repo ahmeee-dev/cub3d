@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
+/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 12:30:04 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/19 12:47:29 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/05/20 14:26:41 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@ int	check_helper(char *line, char *prev, char *next, int *player)
 			not_first++;
 		if (line[i] == '0')
 		{
-			if (!not_first)
+			if (!not_first || surround_check(line, prev, next, i))
 				return (1);
-			if (surround_check(line, prev, next, i))
+		}
+		if (line[i] == 'D')
+		{
+			if (!not_first || (prev[i] != '1' || next[i] != '1') && (line[i - 1] != '1' || line[i + 1] != '1'))
 				return (1);
 		}
 		if (is_player(line[i]))

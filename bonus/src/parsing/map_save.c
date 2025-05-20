@@ -3,39 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   map_save.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
+/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:25:11 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/19 12:47:00 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/05/20 14:24:15 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	is_valid(char c)
+{
+	if (c != '1' && c != '0' && !is_player(c) && c != 'D')
+		return (1);
+	return (0);
+}
 
 // 0 se superato, 1 se fallito
 int	surround_check(char *line, char *prev, char *next, int i)
 {
 	if (i == 0 || !next)
 		return (1);
-	if (line[i - 1] != '1' && line[i - 1] != '0' && !is_player(line[i - 1]))
+	if (is_valid(line[i - 1]))
 		return (1);
-	if (line[i + 1] != '1' && line[i + 1] != '0' && !is_player(line[i + 1]))
+	if (is_valid(line[i + 1]))
 		return (1);
-	if (prev[i] != '1' && prev[i] != '0' && !is_player(prev[i]))
+	if (is_valid(prev[i]))
 		return (1);
-	if (prev[i + 1] != '1' && prev[i + 1] != '0' && !is_player(prev[i + 1]))
+	if (is_valid(prev[i + 1]))
 		return (1);
-	if (prev[i - 1] != '1' && prev[i - 1] != '0' && !is_player(prev[i - 1]))
+	if (is_valid(prev[i - 1]))
 		return (1);
-	if ((next[i] != '1' && next[i] != '0' && !is_player(next[i])))
+	if (is_valid(next[i]))
 		return (1);
-	if ((next[i + 1] != '1' && next[i + 1] != '0' && !is_player(next[i + 1])))
+	if (is_valid(next[i + 1]))
 		return (1);
-	if ((next[i - 1] != '1' && next[i - 1] != '0' && !is_player(next[i - 1])))
+	if (is_valid(next[i - 1]))
 		return (1);
 	return (0);
 }
-
 int	map_check(int fd, char *line)
 {
 	char	*prev;
