@@ -6,11 +6,14 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:14 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/19 12:36:44 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/20 08:24:58 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void	draw_minimap(t_cub *cub);
+
 
 static void	init_ray_dir(t_ray *ray, t_player *p, float camera)
 {
@@ -253,6 +256,7 @@ int	render_scene(t_cub *cub)
 		x += get_x_increment(
 			cub->raycaster.rays[x].perp_wall_dist);
 	}
+	draw_minimap(cub);
 	mlx_put_image_to_window(cub->p, cub->pic.win.p,
 		cub->pic.img.p, 0, 0);
 	update_fps_counter(cub);
