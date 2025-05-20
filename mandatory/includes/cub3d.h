@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 09:48:38 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:02:14 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define TARGET_FPS 60.0f
 # define FRAME_TIME (1.0f / TARGET_FPS)
 
-# define ROTATION_SPEED 0.1f
+# define ROT_SPD 0.1f
 # define MOVE_SPEED 0.2f
 
 # include "../libft/includes/libft.h"

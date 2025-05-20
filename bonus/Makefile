@@ -10,7 +10,7 @@ LIBFT_DIR		= libft
 MLX_DIR			= .minilibx/minilibx-linux
 
 C_FILES			= main.c
-RND_FILES		= raycaster.c raycaster_utils.c mymlx.c mymlx_utils.c fps.c minimap.c
+RND_FILES		= raycaster.c raycaster_utils.c mymlx.c mymlx_utils.c fps.c minimap.c wall_collisions.c
 PRS_FILES		= map_save.c gfx_save.c matrix.c parsing.c general_utils.c map_utils.c gfx_utils.c
 
 SRCS			= $(C_FILES) $(addprefix $(RND_DIR), $(RND_FILES)) $(addprefix $(PRS_DIR), $(PRS_FILES))

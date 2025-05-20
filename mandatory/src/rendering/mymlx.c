@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:01 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 09:43:58 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:02:16 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,17 @@ void	update_dir(t_cub *cub, int type)
 	plane = &cub->raycaster.player.plane;
 	if (type == LEFT)
 	{
-		dir->x = dir->x * cos(-ROTATION_SPEED) - dir->y * sin(-ROTATION_SPEED);
-		dir->y = old_dir * sin(-ROTATION_SPEED) + dir->y * cos(-ROTATION_SPEED);
-		plane->x = plane->x * cos(-ROTATION_SPEED) - plane->y * sin(-ROTATION_SPEED);
-		plane->y = old_plane * sin(-ROTATION_SPEED) + plane->y * cos(-ROTATION_SPEED);
+		dir->x = dir->x * cos(-ROT_SPD) - dir->y * sin(-ROT_SPD);
+		dir->y = old_dir * sin(-ROT_SPD) + dir->y * cos(-ROT_SPD);
+		plane->x = plane->x * cos(-ROT_SPD) - plane->y * sin(-ROT_SPD);
+		plane->y = old_plane * sin(-ROT_SPD) + plane->y * cos(-ROT_SPD);
 	}
 	else if (type == RIGHT)
 	{
-		dir->x = dir->x * cos(ROTATION_SPEED) - dir->y * sin(ROTATION_SPEED);
-		dir->y = old_dir * sin(ROTATION_SPEED) + dir->y * cos(ROTATION_SPEED);
-		plane->x = plane->x * cos(ROTATION_SPEED) - plane->y * sin(ROTATION_SPEED);
-		plane->y = old_plane * sin(ROTATION_SPEED) + plane->y * cos(ROTATION_SPEED);
+		dir->x = dir->x * cos(ROT_SPD) - dir->y * sin(ROT_SPD);
+		dir->y = old_dir * sin(ROT_SPD) + dir->y * cos(ROT_SPD);
+		plane->x = plane->x * cos(ROT_SPD) - plane->y * sin(ROT_SPD);
+		plane->y = old_plane * sin(ROT_SPD) + plane->y * cos(ROT_SPD);
 	}
 }
 
@@ -87,7 +87,7 @@ int	key_release(int keycode, t_cub *cub)
 void	key_handler(t_cub *cub)
 {
 	t_2fpoint		new_pos;
-	
+
 	new_pos = cub->raycaster.player.pos;
 	if (cub->keys.w)
 	{

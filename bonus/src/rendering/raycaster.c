@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:14 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 11:10:19 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:33:46 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,6 @@ static int	execute_dda_step(t_ray *ray, t_map *map)
 	return (0);
 }
 
-void	update_cast_data(t_ray *ray, t_player *p, float camera)
-{
-	init_ray_dir(ray, p, camera);
-	init_delta_dist(ray);
-	init_side_dist(ray, p);
-}
 
 void	run_dda_algorithm(t_ray *ray, t_map *map)
 {
@@ -126,9 +120,10 @@ void	cast_ray(t_ray *ray, t_player *p, t_map *map, int x)
 	float	camera;
 
 	camera = 2 * x / (float)SCREEN_WIDTH - 1;
-	update_cast_data(ray, p, camera);
+	init_ray_dir(ray, p, camera);
+	init_delta_dist(ray);
+	init_side_dist(ray, p);
 	run_dda_algorithm(ray, map);
-
 	if (ray->side == 0)
 		ray->perp_wall_dist = fabsf((ray->cell_pos.x - p->pos.x + (1 - ray->step.x) / 2) / ray->dir.x);
 	else
