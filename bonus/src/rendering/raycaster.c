@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:14 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 08:24:58 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/20 11:10:19 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,30 +153,16 @@ static int	get_x_increment(float perp_dist)
 
 static void	draw_textured_column(t_cub *cub, t_ray *ray, int x)
 {
-	t_image			*texture;
+	t_image			*w_texture;
 	double			wall_x;
 	t_2ipoint		tex_pos;
 	t_2ipoint		tmp;
 	char			*pixel;
 	unsigned int	color;
 
-	if (!cub || !ray)
-		return ;
-	if (ray->side == 0)
-	{
-		if (ray->step.x > 0)
-			texture = &cub->textures.wall.east;
-		else
-			texture = &cub->textures.wall.west;
-	}
-	else
-	{
-		if (ray->step.y > 0)
-			texture = &cub->textures.wall.south;
-		else
-			texture = &cub->textures.wall.north;
-	}
-	if (!texture || !texture->addr)
+
+	w_texture = &cub->textures.wall;
+	if (!w_texture || !w_texture->addr)
 		return ;
 	if (ray->side == 0)
 		wall_x = cub->raycaster.player.pos.y
@@ -185,23 +171,23 @@ static void	draw_textured_column(t_cub *cub, t_ray *ray, int x)
 		wall_x = cub->raycaster.player.pos.x
 			+ ray->perp_wall_dist * ray->dir.x;
 	wall_x -= floor(wall_x);
-	tex_pos.x = (int)(wall_x * texture->size.width);
+	tex_pos.x = (int)(wall_x * w_texture->size.width);
 	if ((ray->side == 0 && ray->dir.x > 0)
 		|| (ray->side == 1 && ray->dir.y < 0))
-		tex_pos.x = texture->size.width - tex_pos.x - 1;
+		tex_pos.x = w_texture->size.width - tex_pos.x - 1;
 	tmp.y = ray->draw_start;
 	while (tmp.y <= ray->draw_end)
 	{
 		tmp.x = tmp.y * 256 - SCREEN_HEIGHT * 128 + ray->line_height * 128;
-		tex_pos.y = (tmp.x * texture->size.height) / ray->line_height / 256;
-		if (tex_pos.y < 0 || tex_pos.y >= texture->size.height
-			|| tex_pos.x < 0 || tex_pos.x >= texture->size.width)
+		tex_pos.y = (tmp.x * w_texture->size.height) / ray->line_height / 256;
+		if (tex_pos.y < 0 || tex_pos.y >= w_texture->size.height
+			|| tex_pos.x < 0 || tex_pos.x >= w_texture->size.width)
 		{
 			(tmp.y)++;
 			continue ;
 		}
-		pixel = texture->addr
-			+ (tex_pos.y * texture->lenght + tex_pos.x * (texture->bits_pp / 8));
+		pixel = w_texture->addr
+			+ (tex_pos.y * w_texture->lenght + tex_pos.x * (w_texture->bits_pp / 8));
 		color = *(unsigned int *)pixel;
 		mymlx_pixel_put(&cub->pic.img, x, (tmp.y), color);
 		(tmp.y)++;
@@ -243,8 +229,8 @@ int	render_scene(t_cub *cub)
 	unsigned int	floor_color;
 	int			x;
 
-	ceiling_color = cub->map.data.ceiling;
-	floor_color = cub->map.data.floor;
+	ceiling_color = 0x00090FFF;
+	floor_color = 0x00FFF900;
 	ft_bzero(cub->pic.img.addr,
 		SCREEN_WIDTH * SCREEN_HEIGHT * (cub->pic.img.bits_pp / 8));
 	x = 0;

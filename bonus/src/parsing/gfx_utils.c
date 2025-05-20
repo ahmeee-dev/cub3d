@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   gfx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 10:38:36 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/20 12:56:58 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/20 11:11:59 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	first_half(char *line, int *result, t_map *map, int *i)
+void	first_half(char *line, int *result, t_map *map, int *i)
 {
 	if (ft_strnstr(line, "WA", 2))
 		result[1] = save_image(i, &map->data.wall, line);
@@ -33,11 +33,11 @@ int	first_half(char *line, int *result, t_map *map, int *i)
 	else if (ft_strnstr(line, "F1", 1))
 		result[9] = save_image(i, &map->data.floor1, line);
 	else if (ft_strnstr(line, "F2", 1))
-		result[10] = save_image(&i, &map->data.floor2, line);
+		result[10] = save_image(i, &map->data.floor2, line);
 	else if (ft_strnstr(line, "F3", 1))
-		result[11] = save_image(&i, &map->data.floor3, line);
+		result[11] = save_image(i, &map->data.floor3, line);
 	else if (ft_strnstr(line, "F4", 1))
-		result[12] = save_image(&i, &map->data.floor4, line);
+		result[12] = save_image(i, &map->data.floor4, line);
 }
 
 int	graphics_helper(char *line, int *gnl_calls, int *result, t_map *map)

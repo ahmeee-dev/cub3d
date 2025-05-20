@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 12:57:20 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/20 11:12:43 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,22 @@ typedef struct s_wall
 
 typedef struct s_textures
 {
-	t_wall	wall;
+	t_image	wall;
+	t_image	door;
+	t_image	gun1;
+	t_image	gun2;
+	t_image	ceiling1;
+	t_image	ceiling2;
+	t_image	ceiling3;
+	t_image	hand;
+	t_image	floor1;
+	t_image	floor2;
+	t_image	floor3;
+	t_image	floor4;
+	t_image	floor5;
+	t_image	floor6;
+	t_image	floor7;
+	t_image	floor8;
 }	t_textures;
 
 typedef struct s_keys
@@ -191,6 +206,7 @@ typedef struct s_cub
 
 
 void	raycaster_init(t_cub *cub);
+void	draw_minimap(t_cub *cub);
 
 void		mymlx_pixel_put(t_image *img, int x, int y, int color);
 int		render_scene(t_cub *cub);

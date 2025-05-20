@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:08 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/19 11:30:09 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/20 11:07:27 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,22 @@ void	mymlx_init(t_cub *cub, char *argv[])
 	cub->pic.img.size.width = SCREEN_WIDTH;
 	cub->pic.img.size.height = SCREEN_HEIGHT;
 
-	load_texture(cub, &cub->textures.wall.north, cub->map.data.nt);
-	load_texture(cub, &cub->textures.wall.south, cub->map.data.st);
-	load_texture(cub, &cub->textures.wall.east, cub->map.data.et);
-	load_texture(cub, &cub->textures.wall.west, cub->map.data.wt);
+	load_texture(cub, &cub->textures.wall, cub->map.data.wall);
+	load_texture(cub, &cub->textures.door, cub->map.data.door);
+	load_texture(cub, &cub->textures.gun1, cub->map.data.gun1);
+	load_texture(cub, &cub->textures.gun2, cub->map.data.gun2);
+	load_texture(cub, &cub->textures.hand, cub->map.data.hand);
+	load_texture(cub, &cub->textures.floor1, cub->map.data.floor1);
+	load_texture(cub, &cub->textures.floor2, cub->map.data.floor1);
+	load_texture(cub, &cub->textures.floor3, cub->map.data.floor1);
+	load_texture(cub, &cub->textures.floor4, cub->map.data.floor1);
+	load_texture(cub, &cub->textures.floor5, cub->map.data.floor1);
+	load_texture(cub, &cub->textures.floor6, cub->map.data.floor1);
+	load_texture(cub, &cub->textures.floor7, cub->map.data.floor1);
+	load_texture(cub, &cub->textures.floor8, cub->map.data.floor1);
+	load_texture(cub, &cub->textures.ceiling1, cub->map.data.ceiling1);
+	load_texture(cub, &cub->textures.ceiling2, cub->map.data.ceiling2);
+	load_texture(cub, &cub->textures.ceiling3, cub->map.data.ceiling3);
 
 	raycaster_init(cub);
 	init_fps_counter(cub);
@@ -59,10 +71,22 @@ int	mymlx_destroy(t_cub *cub)
 	if (cub)
 	{
 		mlx_destroy_image(cub->p, cub->pic.img.p);
-		mlx_destroy_image(cub->p, cub->textures.wall.east.p);
-		mlx_destroy_image(cub->p, cub->textures.wall.west.p);
-		mlx_destroy_image(cub->p, cub->textures.wall.south.p);
-		mlx_destroy_image(cub->p, cub->textures.wall.north.p);
+		mlx_destroy_image(cub->p, cub->textures.wall.p);
+		mlx_destroy_image(cub->p, cub->textures.door.p);
+		mlx_destroy_image(cub->p, cub->textures.gun1.p);
+		mlx_destroy_image(cub->p, cub->textures.gun2.p);
+		mlx_destroy_image(cub->p, cub->textures.wall.p);
+		mlx_destroy_image(cub->p, cub->textures.ceiling1.p);
+		mlx_destroy_image(cub->p, cub->textures.ceiling2.p);
+		mlx_destroy_image(cub->p, cub->textures.ceiling1.p);
+		mlx_destroy_image(cub->p, cub->textures.floor1.p);
+		mlx_destroy_image(cub->p, cub->textures.floor2.p);
+		mlx_destroy_image(cub->p, cub->textures.floor3.p);
+		mlx_destroy_image(cub->p, cub->textures.floor4.p);
+		mlx_destroy_image(cub->p, cub->textures.floor5.p);
+		mlx_destroy_image(cub->p, cub->textures.floor6.p);
+		mlx_destroy_image(cub->p, cub->textures.floor7.p);
+		mlx_destroy_image(cub->p, cub->textures.floor8.p);
 		mlx_destroy_window(cub->p, cub->pic.win.p);
 		free (cub->raycaster.rays);
 		free (cub->p);
