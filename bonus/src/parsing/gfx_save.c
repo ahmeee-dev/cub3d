@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gfx_save.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 10:39:08 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/20 12:56:44 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/05/20 13:39:33 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,6 @@ int	check_safe(char *line, int type)
 	if (line[j] == '\n')
 		return (0);
 	return (1);
-}
-
-int	color_value(char *line)
-{
-	int	value;
-	int	j;
-
-	value = 0;
-	j = 1;
-	value |= (ft_atoi(line + j) << 16);
-	while (line[j] != ',')
-		j++;
-	value |= (ft_atoi(line + (++j)) << 8);
-	while (line[j] != ',')
-		j++;
-	value |= (ft_atoi(line + (++j)));
-	return (value);
 }
 
 int	save_image(int *i, char **dest, char *line)
