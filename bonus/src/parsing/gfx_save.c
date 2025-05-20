@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gfx_save.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
+/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 10:39:08 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/20 10:36:54 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/05/20 11:08:32 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	check_safe(char *line, int type)
 	if (line[j] == '/')
 		j++;
 	while (ft_isalnum(line[j]) || (type == 1 && (line[j] == '_'
-				|| line[j] == '.' || line[j] == '/')) || (type == 2 && line[j] == ','))
+				|| line[j] == '.' || line[j] == '/')) || (type == 2
+			&& line[j] == ','))
 		j++;
 	while (line[j] == ' ')
 		j++;

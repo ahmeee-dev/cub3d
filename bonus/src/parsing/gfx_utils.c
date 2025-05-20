@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gfx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
+/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 10:38:36 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/20 10:47:34 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/05/20 11:08:05 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,3 @@ int	graphics_helper(char *line, int *gnl_calls, int *result, t_map *map)
 	}
 	return (i);
 }
-

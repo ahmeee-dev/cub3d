@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
+/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 15:39:28 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/20 10:40:04 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/05/20 11:08:16 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	is_player(char c)
 		return (1);
 	return (0);
 }
-
-
 
 void	matrix_helper(char *line, int *matrix, int *j, t_map *map)
 {
