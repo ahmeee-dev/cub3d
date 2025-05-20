@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   mymlx.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   CreateGiù giù: 2025/05/15 08:38:01 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 09:43:58 by apintaur         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../includes/cub3d.h"
 
 # define LEFT 0
@@ -81,13 +69,15 @@ int	key_release(int keycode, t_cub *cub)
 		cub->keys.d = 0;
 		cub->keys.right = 0;
 	}
+	else if (keycode == XK_Escape)
+		exit (mymlx_exit(cub));
 	return (1);
 }
 
 void	key_handler(t_cub *cub)
 {
 	t_2fpoint		new_pos;
-	
+
 	new_pos = cub->raycaster.player.pos;
 	if (cub->keys.w)
 	{
@@ -99,16 +89,16 @@ void	key_handler(t_cub *cub)
 		new_pos.x -= cub->raycaster.player.dir.x * MOVE_SPEED;
 		new_pos.y -= cub->raycaster.player.dir.y * MOVE_SPEED;
 	}
-	if (cub->keys.a)
-	{
-		// new_pos.x -= cub->raycaster.player.plane.x * MOVE_SPEED;
-		// new_pos.y -= cub->raycaster.player.plane.y * MOVE_SPEED;
-	}
-	if (cub->keys.d)
-	{
-		// new_pos.x += cub->raycaster.player.plane.x * MOVE_SPEED;
-		// new_pos.y += cub->raycaster.player.plane.y * MOVE_SPEED;
-	}
+	// if (cub->keys.a)
+	// {
+	// 	// new_pos.x -= cub->raycaster.player.plane.x * MOVE_SPEED;
+	// 	// new_pos.y -= cub->raycaster.player.plane.y * MOVE_SPEED;
+	// }
+	// if (cub->keys.d)
+	// {
+	// 	// new_pos.x += cub->raycaster.player.plane.x * MOVE_SPEED;
+	// 	// new_pos.y += cub->raycaster.player.plane.y * MOVE_SPEED;
+	// }
 	if (cub->keys.left)
 		update_dir(cub, LEFT);
 	if (cub->keys.right)

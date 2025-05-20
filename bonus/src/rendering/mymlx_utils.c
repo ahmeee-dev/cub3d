@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:08 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 12:00:37 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:16:47 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	mymlx_init(t_cub *cub, char *argv[])
 	load_texture(cub, &cub->textures.floor6, cub->map.data.floor1);
 	load_texture(cub, &cub->textures.floor7, cub->map.data.floor1);
 	load_texture(cub, &cub->textures.floor8, cub->map.data.floor1);
-
+	cub->keys = (t_keys){0,0,0,0,0,0};
 	raycaster_init(cub);
 	init_fps_counter(cub);
 	mlx_do_key_autorepeaton(cub->p);
@@ -77,10 +77,9 @@ int	mymlx_destroy(t_cub *cub)
 		mlx_destroy_image(cub->p, cub->textures.door.p);
 		mlx_destroy_image(cub->p, cub->textures.gun1.p);
 		mlx_destroy_image(cub->p, cub->textures.gun2.p);
-		mlx_destroy_image(cub->p, cub->textures.wall.p);
 		mlx_destroy_image(cub->p, cub->textures.ceiling1.p);
 		mlx_destroy_image(cub->p, cub->textures.ceiling2.p);
-		mlx_destroy_image(cub->p, cub->textures.ceiling1.p);
+		mlx_destroy_image(cub->p, cub->textures.ceiling3.p);
 		mlx_destroy_image(cub->p, cub->textures.floor1.p);
 		mlx_destroy_image(cub->p, cub->textures.floor2.p);
 		mlx_destroy_image(cub->p, cub->textures.floor3.p);
