@@ -1,18 +1,64 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycaster_utils.c                                  :+:      :+:    :+:   */
+/*   raycaster_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/15 08:38:11 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 12:14:53 by apintaur         ###   ########.fr       */
+/*   Created: 2025/05/20 16:31:10 by apintaur          #+#    #+#             */
+/*   Updated: 2025/05/20 17:23:14 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	is_player(char c);
+void	init_ray_dir(t_ray *ray, t_player *p, float camera)
+{
+	ray->dir.x = p->dir.x + p->plane.x * camera;
+	ray->dir.y = p->dir.y + p->plane.y * camera;
+	ray->cell_pos.x = (int)p->pos.x;
+	ray->cell_pos.y = (int)p->pos.y;
+}
+
+void	init_delta_dist(t_ray *ray)
+{
+	if (fabsf(ray->dir.x) < 0.00001f)
+		ray->delta_dist.x = 1e30;
+	else
+		ray->delta_dist.x = fabsf(1.0f / ray->dir.x);
+	if (fabsf(ray->dir.y) < 0.00001f)
+		ray->delta_dist.y = 1e30;
+	else
+		ray->delta_dist.y = fabsf(1.0f / ray->dir.y);
+}
+
+void	init_side_dist(t_ray *ray, t_player *p)
+{
+	t_2fpoint	pos_diff;
+
+	if (ray->dir.x < 0)
+	{
+		ray->step.x = -1;
+		pos_diff.x = p->pos.x - ray->cell_pos.x;
+	}
+	else
+	{
+		ray->step.x = 1;
+		pos_diff.x = ray->cell_pos.x + 1.0f - p->pos.x;
+	}
+	if (ray->dir.y < 0)
+	{
+		ray->step.y = -1;
+		pos_diff.y = p->pos.y - ray->cell_pos.y;
+	}
+	else
+	{
+		ray->step.y = 1;
+		pos_diff.y = ray->cell_pos.y + 1.0f - p->pos.y;
+	}
+	ray->side_dist.x = pos_diff.x * ray->delta_dist.x;
+	ray->side_dist.y = pos_diff.y * ray->delta_dist.y;
+}
 
 void	init_dir_n_plane(char type, t_player *player)
 {
@@ -38,80 +84,6 @@ void	init_dir_n_plane(char type, t_player *player)
 	}
 }
 
-void draw_vertical_line(t_image *img, int x, int y_start, int y_end, unsigned int color)
-{
-	int y;
-	char *dest;
-
-	if (x < 0 || x >= SCREEN_WIDTH)
-		return ;
-	if (y_start < 0)
-		y_start = 0;
-	if (y_end >= SCREEN_HEIGHT)
-		y_end = SCREEN_HEIGHT - 1;
-	if (y_start > y_end)
-		return ;
-	dest = img->addr + (y_start * img->lenght + x * (img->bits_pp / 8));
-	y = y_start;
-	while (y <= y_end)
-	{
-		*((unsigned int *)dest) = color;
-		dest += img->lenght;
-		y++;
-	}
-}
-
-void draw_horizontal_line(t_image *img, int y, int x_start, int x_end, unsigned int color)
-{
-	int x;
-	char *dest;
-
-	if (y < 0 || y >= SCREEN_HEIGHT)
-		return;
-	if (x_start < 0)
-		x_start = 0;
-	if (x_end >= SCREEN_WIDTH)
-		x_end = SCREEN_WIDTH - 1;
-	if (x_start > x_end)
-		return;
-	dest = img->addr + (y * img->lenght + x_start * (img->bits_pp / 8));
-	x = x_start;
-	while (x_start <= x_end)
-	{
-		*((unsigned int *)dest) = color;
-		dest += (img->bits_pp / 8);
-		x++;
-	}
-}
-
-void	fill_rectangle(t_image *img, int x, int y, int width, int height, unsigned int color)
-{
-	int i;
-
-	if (x < 0)
-	{
-		width += x;
-		x = 0;
-	}
-	if (y < 0)
-	{
-		height += y;
-		y = 0;
-	}
-	if (x + width > SCREEN_WIDTH)
-			width = SCREEN_WIDTH - x;
-	if (y + height > SCREEN_HEIGHT)
-		height = SCREEN_HEIGHT - y;
-	if (width <= 0 || height <= 0)
-		return ;
-	i = 0;
-	while (i < height)
-	{
-		draw_horizontal_line(img, y + i, x, x + width - 1, color);
-		i++;
-	}
-}
-
 void	raycaster_init(t_cub *cub)
 {
 	t_2ipoint	idx;
@@ -123,10 +95,10 @@ void	raycaster_init(t_cub *cub)
 		exit (mymlx_destroy(cub));
 	size = cub->map.sizes;
 	idx = (t_2ipoint) {0,0};
-	while (idx.y < size.map_height)
+	while ((idx.y)++ < size.map_height)
 	{
 		idx.x = 0;
-		while (idx.x < size.map_lenght)
+		while ((idx.x)++ < size.map_lenght)
 		{
 			if (is_player(cub->map.matrix[idx.y * size.map_lenght + idx.x]))
 			{
@@ -137,9 +109,6 @@ void	raycaster_init(t_cub *cub)
 				cub->map.matrix[idx.y * size.map_lenght + idx.x] = FLOOR;
 				return ;
 			}
-			idx.x++;
 		}
-		idx.y++;
 	}
 }
-
