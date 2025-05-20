@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 09:48:38 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/20 10:30:30 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,23 @@ typedef struct s_sizes
 
 typedef struct s_data
 {
-	int		floor;
-	int		ceiling;
-	char	*nt;
-	char	*st;
-	char	*et;
-	char	*wt;
+	char	*wall;
+	char	*door;
+	char	*gun1;
+	char	*gun2;
+	char	*ceiling1;
+	char	*ceiling2;
+	char	*ceiling3;
+	char	*hand;
+	char	*floor1;
+	char	*floor2;
+	char	*floor3;
+	char	*floor4;
+	char	*floor5;
+	char	*floor6;
+	char	*floor7;
+	char	*floor8;
+	char	*floor9;
 }		t_data;
 
 typedef struct	s_map

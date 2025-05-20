@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gfx_save.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 10:39:08 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/19 10:51:17 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/20 10:36:54 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,6 @@ int	color_value(char *line)
 	return (value);
 }
 
-int	save_color(int *i, int *dest, char *line)
-{
-	int	j;
-
-	if (check_safe(line, 2))
-		return (1);
-	j = 1;
-	while (line[j] == ' ')
-		j++;
-	if (color_helper(line, j))
-		return (1);
-	(*i)++;
-	*dest = color_value(line);
-	return (0);
-}
-
 int	save_image(int *i, char **dest, char *line)
 {
 	line = ft_strstr(line, "./");
@@ -85,7 +69,7 @@ int	get_graphics(char *file, t_map *map)
 	char	*line;
 	int		i;
 	int		gnl_calls;
-	int		result[7];
+	int		result[18];
 
 	result[0] = open(file, O_RDONLY);
 	if (result[0] == -1)
@@ -93,10 +77,10 @@ int	get_graphics(char *file, t_map *map)
 	gnl_calls = 1;
 	line = get_next_line(result[0]);
 	i = graphics_helper(line, &gnl_calls, result, map);
-	if (i != 6)
+	if (i != 17)
 		return (0);
 	i = 1;
-	while (i < 7)
+	while (i < 18)
 		if (result[i++] == 1)
 			return (0);
 	return (gnl_calls + 1);
