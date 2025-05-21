@@ -66,6 +66,8 @@ void	mymlx_init(t_cub *cub, char *argv[])
 							&cub->pic.img.lenght, &cub->pic.img.endian);
 	cub->pic.img.size.width = SCREEN_WIDTH;
 	cub->pic.img.size.height = SCREEN_HEIGHT;
+	cub->mouse_times = 0;
+	cub->mouse_x = 0;
 	cub->keys = (t_keys){0, 0, 0, 0, 0, 0};
 	load_textures(cub);
 	raycaster_init(cub);

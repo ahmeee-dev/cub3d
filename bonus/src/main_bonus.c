@@ -53,7 +53,7 @@ int	main(int argc, char **argv)
 	// 		ft_printf("\n");
 	// }
 	// ft_printf("\n");
-
+	mlx_hook(cub.pic.win.p, 6, 1L << 6, mouse_move, &cub);
 	mlx_hook(cub.pic.win.p, 2, 1L << 0, key_press, &cub);
 	mlx_hook(cub.pic.win.p, 3, 1L << 1, key_release, &cub);
 	mlx_hook(cub.pic.win.p, 17, 0, mymlx_exit, &cub);

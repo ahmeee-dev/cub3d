@@ -50,11 +50,7 @@ void	matrix_helper(char *line, int *matrix, int *j, t_map *map)
 	}
 	if (line[i] == '\n' || line[i] == '\0')
 	{
-		while (i < map->sizes.map_lenght)
-		{
-			matrix[*j] = 2;
-			(*j)++;
-			i++;
-		}
+		while (i++ < map->sizes.map_lenght)
+			matrix[(*j)++] = 2;
 	}
 }

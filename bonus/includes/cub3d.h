@@ -21,8 +21,8 @@
 //FLOOR == 0
 //BLANK == 2
 
-# define SCREEN_WIDTH 2000
-# define SCREEN_HEIGHT 1900
+# define SCREEN_WIDTH 1000
+# define SCREEN_HEIGHT 700
 
 # define CELL_SIZE 64
 # define FOV 60.0f
@@ -36,6 +36,7 @@
 
 # define MAX_DIST 1e30
 
+# define MOUSE_SPEED 4
 // Minimap definitions
 # define MINIMAP_SCALE_FACTOR 100
 # define MINIMAP_CELL_SIZE (SCREEN_WIDTH / MINIMAP_SCALE_FACTOR)
@@ -222,6 +223,8 @@ typedef struct s_cub
 	double		last_time;
 	double		fps;
 	double		fps_accum;
+	int			mouse_x;
+	int			mouse_times;
 }	t_cub;
 
 
@@ -249,6 +252,8 @@ void	fill_remaining_columns(t_cub *cub, t_ray *ray, int x,
 t_image	*get_floor_type(t_cub *cub, int cell_x, int cell_y);
 t_image	*get_ceiling_type(t_cub *cub, int cell_x, int cell_y);
 void	draw_floor(t_cub *cub, t_ray *ray, int x);
+int		mouse_move(int x, int y, void *param);
+void	update_dir(t_cub *cub, int type);
 
 // Funzioni per FPS counter
 double	get_time();
