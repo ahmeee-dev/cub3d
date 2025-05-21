@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_save.c                                         :+:      :+:    :+:   */
+/*   map_save_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:25:11 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/21 09:04:12 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 09:16:43 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	surround_check(char *line, char *prev, char *next, int i)
 		return (1);
 	return (0);
 }
-
 int	map_check(int fd, char *line)
 {
 	char	*prev;

@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:08 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 09:38:00 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 09:38:59 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 void	load_texture(t_cub *cub, t_image *img, char *path)
 {
 	img->p = mlx_xpm_file_to_image(cub->p, path, &img->size.width, &img->size.height);
+	ft_printf("%s Error: cannot load xpm!\n", path);
 	if (!img->p)
 	{
-		ft_printf("Error: cannot load xpm!\n");
 		mymlx_exit(cub);
 	}
 	img->addr = mlx_get_data_addr(img->p, &img->bits_pp, &img->lenght, &img->endian);
@@ -52,7 +52,6 @@ void	mymlx_init(t_cub *cub, char *argv[])
 	cub->keys = (t_keys){0, 0, 0, 0, 0, 0};
 
 	raycaster_init(cub);
-	init_fps_counter(cub);
 	mlx_do_key_autorepeaton(cub->p);
 }
 

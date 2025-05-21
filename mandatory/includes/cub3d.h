@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 16:02:14 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 09:11:56 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@
 # define ROT_SPD 0.1f
 # define MOVE_SPEED 0.2f
 
-# include "../libft/includes/libft.h"
-# include "../.minilibx/minilibx-linux/mlx.h"
-# include "../.minilibx/minilibx-linux/mlx_int.h"
+# include "../../libft/includes/libft.h"
+# include "../../.minilibx/minilibx-linux/mlx.h"
+# include "../../.minilibx/minilibx-linux/mlx_int.h"
 
 # include <math.h>
 # include <X11/X.h>
@@ -190,18 +190,13 @@ int		mymlx_render(t_cub *cub);
 int		mymlx_exit(t_cub *cub);
 void		mymlx_init(t_cub *cub, char *argv[]);
 int		mymlx_destroy(t_cub *cub);
-void		key_handler(t_cub *cub);
+int		key_handler(t_cub *cub);
 int		main_loop(t_cub *cub);
 void		draw_vertical_line(t_image *img, int x, int y_start, int y_end, unsigned int color);
 void		draw_horizontal_line(t_image *img, int y, int x_start, int x_end, unsigned int color);
 void		fill_rectangle(t_image *img, int x, int y, int width, int height, unsigned int color);
 int		key_press(int keycode, t_cub *cub);
 int		key_release(int keycode, t_cub *cub);
-
-// Funzioni per FPS counter
-double	get_time();
-void	init_fps_counter(t_cub *cub);
-void	update_fps_counter(t_cub *cub);
 
 //Matrix-realted functions
 void	matrix_creation(t_map *map, int fd, int gnl_calls);

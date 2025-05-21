@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:01 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 16:02:16 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 09:33:46 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	key_release(int keycode, t_cub *cub)
 	return (1);
 }
 
-void	key_handler(t_cub *cub)
+int	key_handler(t_cub *cub)
 {
 	t_2fpoint		new_pos;
 
@@ -114,6 +114,7 @@ void	key_handler(t_cub *cub)
 	if (cub->keys.right)
 		update_dir(cub, RIGHT);
 	check_collisions(cub, new_pos, cub->raycaster.player.pos);
+	return (render_scene(cub));
 }
 
 

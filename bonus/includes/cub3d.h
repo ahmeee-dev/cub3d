@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:24:17 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/21 08:34:42 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 09:12:12 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@
 # define FOV_ANGLE_STEP 0.06f
 # define FOV_RADIANS 1.151917f
 
-# include "../libft/includes/libft.h"
-# include "../.minilibx/minilibx-linux/mlx.h"
-# include "../.minilibx/minilibx-linux/mlx_int.h"
+# include "../../libft/includes/libft.h"
+# include "../../.minilibx/minilibx-linux/mlx.h"
+# include "../../.minilibx/minilibx-linux/mlx_int.h"
 
 # include <math.h>
 # include <X11/X.h>

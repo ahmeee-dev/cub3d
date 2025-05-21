@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_utils.c                                        :+:      :+:    :+:   */
+/*   map_utils_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 12:30:04 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/05/21 09:04:34 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 09:16:43 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@ int	check_helper(char *line, char *prev, char *next, int *player)
 			not_first++;
 		if (line[i] == '0')
 		{
-			if (!not_first)
+			if (!not_first || surround_check(line, prev, next, i))
 				return (1);
-			if (surround_check(line, prev, next, i))
+		}
+		if (line[i] == 'D')
+		{
+			if (!not_first || ((prev[i] != '1' || next[i] != '1') && (line[i - 1] != '1' || line[i + 1] != '1')))
 				return (1);
 		}
 		if (is_player(line[i]))

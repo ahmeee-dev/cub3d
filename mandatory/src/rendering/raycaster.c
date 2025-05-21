@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:14 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/19 12:36:44 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 09:03:51 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,6 +255,5 @@ int	render_scene(t_cub *cub)
 	}
 	mlx_put_image_to_window(cub->p, cub->pic.win.p,
 		cub->pic.img.p, 0, 0);
-	update_fps_counter(cub);
 	return (0);
 }
