@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mymlx.c                                            :+:      :+:    :+:   */
+/*   mymlx_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:00:06 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 16:03:55 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:34:30 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,16 +99,6 @@ void	key_handler(t_cub *cub)
 		new_pos.x -= cub->raycaster.player.dir.x * MOVE_SPEED;
 		new_pos.y -= cub->raycaster.player.dir.y * MOVE_SPEED;
 	}
-	// if (cub->keys.a)
-	// {
-	// 	// new_pos.x -= cub->raycaster.player.plane.x * MOVE_SPEED;
-	// 	// new_pos.y -= cub->raycaster.player.plane.y * MOVE_SPEED;
-	// }
-	// if (cub->keys.d)
-	// {
-	// 	// new_pos.x += cub->raycaster.player.plane.x * MOVE_SPEED;
-	// 	// new_pos.y += cub->raycaster.player.plane.y * MOVE_SPEED;
-	// }
 	if (cub->keys.left)
 		update_dir(cub, LEFT);
 	if (cub->keys.right)

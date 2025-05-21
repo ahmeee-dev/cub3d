@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:14 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/21 10:51:20 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:32:33 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ void	init_ray_dir(t_ray *ray, t_player *p, float camera);
 void	init_delta_dist(t_ray *ray);
 void	init_side_dist(t_ray *ray, t_player *p);
 void	draw_minimap(t_cub *cub);
-void	draw_column_parts(t_cub *cub, int x, t_ray *ray,
-	unsigned int ceiling_color, unsigned int floor_color);
+void	render_textures(t_cub *cub, int x, t_ray *ray);
 
 static void	calculate_wall_height(t_ray *ray)
 {
@@ -59,23 +58,10 @@ void	cast_ray(t_ray *ray, t_player *p, t_map *map, int x)
 	calculate_wall_height(ray);
 }
 
-void	render_column(t_cub *cub, int x,
-	unsigned int ceiling_color, unsigned int floor_color)
-{
-	t_ray	*ray;
-
-	ray = &cub->raycaster.rays[x];
-	draw_column_parts(cub, x, ray, ceiling_color, floor_color);
-}
-
 int	render_scene(t_cub *cub)
 {
-	unsigned int	ceiling_color;
-	unsigned int	floor_color;
 	int				x;
 
-	ceiling_color = 0x00090FFF;
-	floor_color = 0x00FFF900;
 	ft_bzero(cub->pic.img.addr,
 		SCREEN_WIDTH * SCREEN_HEIGHT * (cub->pic.img.bits_pp / 8));
 	x = 0;
@@ -83,7 +69,7 @@ int	render_scene(t_cub *cub)
 	{
 		cast_ray(&cub->raycaster.rays[x],
 			&cub->raycaster.player, &cub->map, x);
-		render_column(cub, x, ceiling_color, floor_color);
+		render_textures(cub, x, &cub->raycaster.rays[x]);
 		if (cub->raycaster.rays[x].perp_wall_dist > LOD_THRESHOLD)
 			x += RENDER_SCALE;
 		else

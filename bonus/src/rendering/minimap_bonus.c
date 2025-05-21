@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap.c                                          :+:      :+:    :+:   */
+/*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 08:21:02 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/21 07:19:13 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:34:21 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	cast_minimap_fov_ray(t_cub *cub, t_2ipoint base_offset, float angle)
 	ray_dir = (t_2fpoint){cosf(angle) * 0.03f, sinf(angle) * 0.03f};
 	curr_pmap = cub->raycaster.player.pos;
 	steps = 0;
-	while (steps < MINIMAP_CELL_SIZE * 5) // Adjusted FOV ray length
+	while (steps < MINIMAP_CELL_SIZE * 5)
 	{
 		check.x = base_offset.x + (int)(curr_pmap.x * MINIMAP_CELL_SIZE);
 		check.y = base_offset.y + (int)(curr_pmap.y * MINIMAP_CELL_SIZE);

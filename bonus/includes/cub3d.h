@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:24:17 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/21 10:53:49 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:26:12 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define MAX_DIST 1e30
 
 # define MOUSE_SPEED 4
+# define LIGHT_INTERVAL 1000  // columns between light-pattern spawns
 // Minimap definitions
 # define MINIMAP_SCALE_FACTOR 100
 # define MINIMAP_CELL_SIZE (SCREEN_WIDTH / MINIMAP_SCALE_FACTOR)
@@ -195,10 +196,10 @@ typedef struct s_textures
 	t_image	gun_nofire;
 	t_image	gun_fire;
 	t_image	ceiling_light;
-	t_image	ceiling_nolight[2];
+	t_image	ceiling_nolight;
 	t_image	hand;
-	t_image floor_light[4];
-	t_image floor_nolight[4];
+	t_image floor_light;
+	t_image floor_nolight;
 }	t_textures;
 
 typedef struct s_keys
@@ -245,13 +246,13 @@ int		key_release(int keycode, t_cub *cub);
 
 void	run_dda_algorithm(t_ray *ray, t_map *map);
 void	draw_texture_line(t_cub *cub, t_ray *ray, t_image *w_texture, int x);
+void	draw_floor_ceiling_texture(t_cub *cub, t_ray *ray, t_image *texture, int x, int is_ceiling);
 void	render_column(t_cub *cub, int x, unsigned int ceiling_color,
 		unsigned int floor_color);
-void	fill_remaining_columns(t_cub *cub, t_ray *ray, int x,
-		unsigned int ceiling_color, unsigned int floor_color);
+
 t_image	*get_floor_type(t_cub *cub, int cell_x, int cell_y);
 t_image	*get_ceiling_type(t_cub *cub, int cell_x, int cell_y);
-void	draw_floor(t_cub *cub, t_ray *ray, int x);
+void	draw_floor(t_cub *cub, t_ray *ray, t_image *texture, int x);
 int		mouse_move(int x, int y, void *param);
 void	update_dir(t_cub *cub, int type);
 
@@ -282,5 +283,5 @@ void	matrix_helper(char *line, int *matrix, int *j, t_map *map);
 int		check_helper(char *line, char *prev, char *next, int *player);
 void	sizes_helper(char *line, int fd, t_map *map);
 char	*gnl_helper(char *line, int gnl_calls, int fd);
-
+void		render_textures(t_cub *cub, int x, t_ray *ray);
 #endif

@@ -6,8 +6,8 @@ C1 ./textures/Ceiling/ceiling_light.xpm
 C2 ./textures/Ceiling/ceiling_nolight.xpm
 C3 ./textures/Ceiling/ceiling_norugg.xpm
 HA ./textures/Hand/hand.xpm
-F1 ./textures/Floor/floor_1_lume.xpm
-F2 ./textures/Floor/floor_1.xpm
+F1 ./textures/Floor/floor_light.xpm
+F2 ./textures/Floor/floor_nolight.xpm
 F3 ./textures/Floor/floor_2_lume.xpm
 F4 ./textures/Floor/floor_2.xpm
 F5 ./textures/Floor/floor_3_lume.xpm
