@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycaster.c                                        :+:      :+:    :+:   */
+/*   raycaster_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:14 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 17:23:20 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 10:51:20 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	render_column(t_cub *cub, int x,
 
 	ray = &cub->raycaster.rays[x];
 	draw_column_parts(cub, x, ray, ceiling_color, floor_color);
-	fill_remaining_columns(cub, ray, x, ceiling_color, floor_color);
 }
 
 int	render_scene(t_cub *cub)

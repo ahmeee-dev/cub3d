@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycaster_draws.c                                  :+:      :+:    :+:   */
+/*   raycaster_draws_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:11 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 17:19:45 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 10:53:49 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_player(char c);
 
-void draw_vertical_line(t_image *img, int x, t_2ipoint range, unsigned int color)
+void draw_line(t_image *img, int x, t_2ipoint range, unsigned int color)
 {
 	int y;
 	char *dest;
@@ -76,31 +76,12 @@ void	draw_column_parts(t_cub *cub, int x, t_ray *ray,
 {
 	t_image	*w_texture;
 
-	draw_vertical_line(&cub->pic.img, x, (t_2ipoint){0, ray->draw_start - 1}, ceiling_color);
+	draw_line(&cub->pic.img, x, (t_2ipoint){0, ray->draw_start - 1}, ceiling_color);
 	w_texture = &cub->textures.wall;
 	if (w_texture && w_texture->addr)
 		draw_texture_line(cub, ray, w_texture, x);
-	draw_vertical_line(&cub->pic.img, x, (t_2ipoint){ray->draw_end + 1,
+	draw_line(&cub->pic.img, x, (t_2ipoint){ray->draw_end + 1,
 		SCREEN_HEIGHT - 1}, floor_color);
 }
 
-void	fill_remaining_columns(t_cub *cub, t_ray *ray, int x,
-	unsigned int ceiling_color, unsigned int floor_color)
-{
-	int	inc;
-	int	i;
-
-	if (ray->perp_wall_dist > LOD_THRESHOLD)
-		inc = RENDER_SCALE;
-	else
-		inc = 1;
-	if (inc <= 1 || x + inc >= SCREEN_WIDTH)
-		return ;
-	i = 1;
-	while (i < inc && x + i < SCREEN_WIDTH)
-	{
-		draw_column_parts(cub, x + i, ray, ceiling_color, floor_color);
-		i++;
-	}
-}
 

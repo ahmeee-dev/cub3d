@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:14 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/21 09:03:51 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 10:53:52 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,10 +213,10 @@ static void render_column(t_cub *cub, int x,
 	int inc;
 
 	ray = &cub->raycaster.rays[x];
-	draw_vertical_line(&cub->pic.img, x,
+	draw_line(&cub->pic.img, x,
 		0, ray->draw_start - 1, ceiling_color);
 	draw_textured_column(cub, ray, x);
-	draw_vertical_line(&cub->pic.img, x,
+	draw_line(&cub->pic.img, x,
 		ray->draw_end + 1, SCREEN_HEIGHT - 1, floor_color);
 	inc = get_x_increment(ray->perp_wall_dist);
 	if (inc > 1 && x + inc < SCREEN_WIDTH)
@@ -224,10 +224,10 @@ static void render_column(t_cub *cub, int x,
 		i = 1;
 		while (i < inc && x + i < SCREEN_WIDTH)
 		{
-			draw_vertical_line(&cub->pic.img, x + i,
+			draw_line(&cub->pic.img, x + i,
 				0, ray->draw_start - 1, ceiling_color);
 			draw_textured_column(cub, ray, x + i);
-			draw_vertical_line(&cub->pic.img, x + i,
+			draw_line(&cub->pic.img, x + i,
 				ray->draw_end + 1, SCREEN_HEIGHT - 1, floor_color);
 			i++;
 		}

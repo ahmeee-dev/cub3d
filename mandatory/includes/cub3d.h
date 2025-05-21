@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:29:10 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/21 09:11:56 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 10:53:50 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,9 +192,8 @@ void		mymlx_init(t_cub *cub, char *argv[]);
 int		mymlx_destroy(t_cub *cub);
 int		key_handler(t_cub *cub);
 int		main_loop(t_cub *cub);
-void		draw_vertical_line(t_image *img, int x, int y_start, int y_end, unsigned int color);
+void		draw_line(t_image *img, int x, int y_start, int y_end, unsigned int color);
 void		draw_horizontal_line(t_image *img, int y, int x_start, int x_end, unsigned int color);
-void		fill_rectangle(t_image *img, int x, int y, int width, int height, unsigned int color);
 int		key_press(int keycode, t_cub *cub);
 int		key_release(int keycode, t_cub *cub);
 

@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:11 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/15 19:59:10 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 10:53:51 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	init_dir_n_plane(char type, t_player *player)
 	}
 }
 
-void draw_vertical_line(t_image *img, int x, int y_start, int y_end, unsigned int color)
+void draw_line(t_image *img, int x, int y_start, int y_end, unsigned int color)
 {
 	int y;
 	char *dest;
@@ -58,57 +58,6 @@ void draw_vertical_line(t_image *img, int x, int y_start, int y_end, unsigned in
 		*((unsigned int *)dest) = color;
 		dest += img->lenght;
 		y++;
-	}
-}
-
-void draw_horizontal_line(t_image *img, int y, int x_start, int x_end, unsigned int color)
-{
-	int x;
-	char *dest;
-
-	if (y < 0 || y >= SCREEN_HEIGHT)
-		return;
-	if (x_start < 0)
-		x_start = 0;
-	if (x_end >= SCREEN_WIDTH)
-		x_end = SCREEN_WIDTH - 1;
-	if (x_start > x_end)
-		return;
-	dest = img->addr + (y * img->lenght + x_start * (img->bits_pp / 8));
-	x = x_start;
-	while (x_start <= x_end)
-	{
-		*((unsigned int *)dest) = color;
-		dest += (img->bits_pp / 8);
-		x++;
-	}
-}
-
-void	fill_rectangle(t_image *img, int x, int y, int width, int height, unsigned int color)
-{
-	int i;
-
-	if (x < 0)
-	{
-		width += x;
-		x = 0;
-	}
-	if (y < 0)
-	{
-		height += y;
-		y = 0;
-	}
-	if (x + width > SCREEN_WIDTH)
-			width = SCREEN_WIDTH - x;
-	if (y + height > SCREEN_HEIGHT)
-		height = SCREEN_HEIGHT - y;
-	if (width <= 0 || height <= 0)
-		return ;
-	i = 0;
-	while (i < height)
-	{
-		draw_horizontal_line(img, y + i, x, x + width - 1, color);
-		i++;
 	}
 }
 

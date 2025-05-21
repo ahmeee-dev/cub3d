@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:24:17 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/21 10:05:13 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 10:53:49 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,7 +236,7 @@ int		mymlx_exit(t_cub *cub);
 int		mymlx_destroy(t_cub *cub);
 void	raycaster_init(t_cub *cub);
 void	draw_minimap(t_cub *cub);
-void	draw_vertical_line(t_image *img, int x, t_2ipoint range, unsigned int color);
+void	draw_line(t_image *img, int x, t_2ipoint range, unsigned int color);
 int		render_scene(t_cub *cub);
 void	cast_ray(t_ray *ray, t_player *p, t_map *map, int x);
 void	key_handler(t_cub *cub);
