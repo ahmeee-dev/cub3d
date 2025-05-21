@@ -18,11 +18,9 @@ int	mouse_move(int x, int y, void *param)
 	if (x > data->mouse_x && !(data->mouse_times % MOUSE_SPEED))
     {
         update_dir(data, RIGHT);
-        ft_printf("%d\n", data->mouse_times);
     }
 	else if (x < data->mouse_x && !(data->mouse_times % MOUSE_SPEED))
     {
-        ft_printf("%d\n", data->mouse_times);
 		update_dir(data, LEFT);
     }
 	data->mouse_x = x;

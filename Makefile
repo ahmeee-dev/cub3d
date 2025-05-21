@@ -20,7 +20,6 @@ RND_FILES_BONUS			= mymlx_bonus.c mymlx_utils_bonus.c fps_bonus.c minimap_bonus.
 PRS_FILES_BONUS			= map_save_bonus.c gfx_save_bonus.c matrix_bonus.c parsing_bonus.c general_utils_bonus.c map_utils_bonus.c gfx_utils_bonus.c
 
 SRCS_MANDATORY			= $(C_FILES_MANDATORY) $(addprefix $(RND_DIR), $(RND_FILES_MANDATORY)) $(addprefix $(PRS_DIR), $(PRS_FILES_MANDATORY))
-
 SRCS_BONUS				= $(C_FILES_BONUS) $(addprefix $(RND_DIR), $(RND_FILES_BONUS)) $(addprefix $(PRS_DIR), $(PRS_FILES_BONUS))
 
 OBJS_MANDATORY			= $(addprefix $(SRC_DIR_MANDATORY), $(SRCS_MANDATORY:.c=.o))
@@ -52,14 +51,25 @@ $(SRC_DIR_BONUS)%.o: $(SRC_DIR_BONUS)%.c $(H_DIR)/cub3d.h
 	$(CC) $(CFLAGS) -I $(H_DIR) -I $(LIBFT_DIR)/includes -I $(MLX_DIR) -c $< -o $@
 
 clean:
-	rm -f $(OBJS_MANDATORY) $(OBJS_BONUS)
+	rm -f $(OBJS_MANDATORY)
+	$(MAKE) clean -C $(LIBFT_DIR)
+	$(MAKE) clean -C $(MLX_DIR)
+
+clean_bonus:
+	rm -f $(OBJS_BONUS)
 	$(MAKE) clean -C $(LIBFT_DIR)
 	$(MAKE) clean -C $(MLX_DIR)
 
 fclean: clean
-	rm -f $(MANDATORY_NAME) $(BONUS_NAME)
+	rm -f $(MANDATORY_NAME)
+	$(MAKE) fclean -C $(LIBFT_DIR)
+
+fclean_bonus: clean_bonus
+	rm -f $(BONUS_NAME)
 	$(MAKE) fclean -C $(LIBFT_DIR)
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+re_bonus: fclean_bonus bonus
+
+.PHONY: all bonus clean clean_bonus fclean fclean_bonus re re_bonus

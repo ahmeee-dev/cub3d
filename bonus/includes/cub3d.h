@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:24:17 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/21 09:12:12 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 10:05:13 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 //FLOOR == 0
 //BLANK == 2
 
-# define SCREEN_WIDTH 1000
-# define SCREEN_HEIGHT 700
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1080
 
 # define CELL_SIZE 64
 # define FOV 60.0f
