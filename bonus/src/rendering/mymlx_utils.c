@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:08 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 15:59:42 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 07:44:15 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,21 @@ void	load_single_texture(t_cub *cub, t_image *img, char *path)
 static void	load_textures(t_cub *cub)
 {
 	load_single_texture(cub, &cub->textures.wall, cub->map.data.wall);
-	load_single_texture(cub, &cub->textures.gun1, cub->map.data.gun1);
-	load_single_texture(cub, &cub->textures.gun2, cub->map.data.gun2);
+	load_single_texture(cub, &cub->textures.gun_fire, cub->map.data.gun1);
+	load_single_texture(cub, &cub->textures.gun_nofire, cub->map.data.gun2);
 	load_single_texture(cub, &cub->textures.door, cub->map.data.door);
-	load_single_texture(cub, &cub->textures.ceiling1, cub->map.data.ceiling1);
-	load_single_texture(cub, &cub->textures.ceiling2, cub->map.data.ceiling2);
-	load_single_texture(cub, &cub->textures.ceiling3, cub->map.data.ceiling3);
+	load_single_texture(cub, &cub->textures.ceiling_light, cub->map.data.ceiling1);
+	load_single_texture(cub, &cub->textures.ceiling_nolight[0], cub->map.data.ceiling2);
+	load_single_texture(cub, &cub->textures.ceiling_nolight[1], cub->map.data.ceiling3);
 	load_single_texture(cub, &cub->textures.hand, cub->map.data.hand);
-	load_single_texture(cub, &cub->textures.floor1, cub->map.data.floor1);
-	load_single_texture(cub, &cub->textures.floor2, cub->map.data.floor1);
-	load_single_texture(cub, &cub->textures.floor3, cub->map.data.floor1);
-	load_single_texture(cub, &cub->textures.floor4, cub->map.data.floor1);
-	load_single_texture(cub, &cub->textures.floor5, cub->map.data.floor1);
-	load_single_texture(cub, &cub->textures.floor6, cub->map.data.floor1);
-	load_single_texture(cub, &cub->textures.floor7, cub->map.data.floor1);
-	load_single_texture(cub, &cub->textures.floor8, cub->map.data.floor1);
+	load_single_texture(cub, &cub->textures.floor_light[0], cub->map.data.floor1);
+	load_single_texture(cub, &cub->textures.floor_light[1], cub->map.data.floor3);
+	load_single_texture(cub, &cub->textures.floor_light[2], cub->map.data.floor5);
+	load_single_texture(cub, &cub->textures.floor_light[3], cub->map.data.floor7);
+	load_single_texture(cub, &cub->textures.floor_nolight[0], cub->map.data.floor2);
+	load_single_texture(cub, &cub->textures.floor_nolight[1], cub->map.data.floor4);
+	load_single_texture(cub, &cub->textures.floor_nolight[2], cub->map.data.floor6);
+	load_single_texture(cub, &cub->textures.floor_nolight[3], cub->map.data.floor8);
 }
 
 void	mymlx_init(t_cub *cub, char *argv[])
@@ -75,24 +75,25 @@ void	mymlx_init(t_cub *cub, char *argv[])
 
 int	mymlx_destroy(t_cub *cub)
 {
+	int	i;
+
 	if (cub)
 	{
+		i = 0;
 		mlx_destroy_image(cub->p, cub->pic.img.p);
 		mlx_destroy_image(cub->p, cub->textures.wall.p);
 		mlx_destroy_image(cub->p, cub->textures.door.p);
-		mlx_destroy_image(cub->p, cub->textures.gun1.p);
-		mlx_destroy_image(cub->p, cub->textures.gun2.p);
-		mlx_destroy_image(cub->p, cub->textures.ceiling1.p);
-		mlx_destroy_image(cub->p, cub->textures.ceiling2.p);
-		mlx_destroy_image(cub->p, cub->textures.ceiling3.p);
-		mlx_destroy_image(cub->p, cub->textures.floor1.p);
-		mlx_destroy_image(cub->p, cub->textures.floor2.p);
-		mlx_destroy_image(cub->p, cub->textures.floor3.p);
-		mlx_destroy_image(cub->p, cub->textures.floor4.p);
-		mlx_destroy_image(cub->p, cub->textures.floor5.p);
-		mlx_destroy_image(cub->p, cub->textures.floor6.p);
-		mlx_destroy_image(cub->p, cub->textures.floor7.p);
-		mlx_destroy_image(cub->p, cub->textures.floor8.p);
+		mlx_destroy_image(cub->p, cub->textures.gun_fire.p);
+		mlx_destroy_image(cub->p, cub->textures.gun_nofire.p);
+		mlx_destroy_image(cub->p, cub->textures.ceiling_light.p);
+		mlx_destroy_image(cub->p, cub->textures.ceiling_nolight[0].p);
+		mlx_destroy_image(cub->p, cub->textures.ceiling_nolight[1].p);
+		while (i < 4)
+		{
+			mlx_destroy_image(cub->p, cub->textures.floor_light[i].p);
+			mlx_destroy_image(cub->p, cub->textures.floor_nolight[i].p);
+			i++;
+		}
 		mlx_destroy_window(cub->p, cub->pic.win.p);
 		free (cub->raycaster.rays);
 		free (cub->p);

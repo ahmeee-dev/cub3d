@@ -6,25 +6,12 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 08:21:02 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 16:30:23 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 07:19:13 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 #include <math.h>
-
-#define MINIMAP_RIGHT_MARGIN 10
-#define MINIMAP_OFFSET_Y 10
-
-#define MINIMAP_CELL_SIZE 12
-#define MINIMAP_PLAYER_SIZE 8
-
-#define MINIMAP_WALL_COLOR 0x333333
-#define MINIMAP_FLOOR_COLOR 0xFFFFFFFF
-#define MINIMAP_PLAYER_COLOR 0xFF0000
-#define FOV_FILL_COLOR 0xFFFF00
-#define FOV_ANGLE_STEP 0.01f
-#define FOV_RADIANS 1.151917f
 
 static void	draw_minimap_square(t_image *img, t_2ipoint start,
 				int size, unsigned int color)
@@ -57,7 +44,7 @@ static void	cast_minimap_fov_ray(t_cub *cub, t_2ipoint base_offset, float angle)
 	ray_dir = (t_2fpoint){cosf(angle) * 0.03f, sinf(angle) * 0.03f};
 	curr_pmap = cub->raycaster.player.pos;
 	steps = 0;
-	while (steps < MINIMAP_CELL_SIZE * 5)
+	while (steps < MINIMAP_CELL_SIZE * 5) // Adjusted FOV ray length
 	{
 		check.x = base_offset.x + (int)(curr_pmap.x * MINIMAP_CELL_SIZE);
 		check.y = base_offset.y + (int)(curr_pmap.y * MINIMAP_CELL_SIZE);

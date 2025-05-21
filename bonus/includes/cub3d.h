@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:24:17 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 17:24:20 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 08:34:42 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 //FLOOR == 0
 //BLANK == 2
 
-# define SCREEN_WIDTH 800
-# define SCREEN_HEIGHT 600
+# define SCREEN_WIDTH 2000
+# define SCREEN_HEIGHT 1900
 
 # define CELL_SIZE 64
 # define FOV 60.0f
@@ -30,10 +30,28 @@
 # define RENDER_SCALE 2 // con 1 è full quality, con 2 1/2 quality per grandi distanze
 # define LOD_THRESHOLD 1.0f //distanza da cui switchare la qualità bassa
 # define TARGET_FPS 60.0f
-# define FRAME_TIME (1.0f / TARGET_FPS)
 
 # define ROT_SPD 0.1f
 # define MOVE_SPEED 0.2f
+
+# define MAX_DIST 1e30
+
+// Minimap definitions
+# define MINIMAP_SCALE_FACTOR 100
+# define MINIMAP_CELL_SIZE (SCREEN_WIDTH / MINIMAP_SCALE_FACTOR)
+# define MINIMAP_PLAYER_SIZE (MINIMAP_CELL_SIZE / 3)
+# define MINIMAP_RIGHT_MARGIN (SCREEN_WIDTH / 80)
+# define MINIMAP_OFFSET_Y (SCREEN_HEIGHT / 60)
+
+// Minimap colors
+# define MINIMAP_WALL_COLOR 0x333333
+# define MINIMAP_FLOOR_COLOR 0xFFFFFFFF
+# define MINIMAP_PLAYER_COLOR 0xFF0000
+# define FOV_FILL_COLOR 0xFFFF00
+
+// FOV drawing parameters
+# define FOV_ANGLE_STEP 0.06f
+# define FOV_RADIANS 1.151917f
 
 # include "../libft/includes/libft.h"
 # include "../.minilibx/minilibx-linux/mlx.h"
@@ -104,11 +122,20 @@ typedef struct s_data
 	char	*floor8;
 }		t_data;
 
+typedef struct s_cell_tex
+{
+	int	floor_tex_idx;
+	int	ceiling_tex_idx;
+}	t_cell_tex;
+
 typedef struct	s_map
 {
-	t_data		data;
+	t_data			data;
 	t_sizes		sizes;
 	int			*matrix;
+	char			**map;
+	int				width;
+	int				height;
 }		t_map;
 
 //Rendering structures
@@ -164,20 +191,13 @@ typedef struct s_textures
 {
 	t_image	wall;
 	t_image	door;
-	t_image	gun1;
-	t_image	gun2;
-	t_image	ceiling1;
-	t_image	ceiling2;
-	t_image	ceiling3;
+	t_image	gun_nofire;
+	t_image	gun_fire;
+	t_image	ceiling_light;
+	t_image	ceiling_nolight[2];
 	t_image	hand;
-	t_image	floor1;
-	t_image	floor2;
-	t_image	floor3;
-	t_image	floor4;
-	t_image	floor5;
-	t_image	floor6;
-	t_image	floor7;
-	t_image	floor8;
+	t_image floor_light[4];
+	t_image floor_nolight[4];
 }	t_textures;
 
 typedef struct s_keys
@@ -226,6 +246,9 @@ void	render_column(t_cub *cub, int x, unsigned int ceiling_color,
 		unsigned int floor_color);
 void	fill_remaining_columns(t_cub *cub, t_ray *ray, int x,
 		unsigned int ceiling_color, unsigned int floor_color);
+t_image	*get_floor_type(t_cub *cub, int cell_x, int cell_y);
+t_image	*get_ceiling_type(t_cub *cub, int cell_x, int cell_y);
+void	draw_floor(t_cub *cub, t_ray *ray, int x);
 
 // Funzioni per FPS counter
 double	get_time();

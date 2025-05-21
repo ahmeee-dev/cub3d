@@ -6,13 +6,12 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:20 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 09:41:17 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/21 08:28:16 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-# define LEFT 0
-# define RIGHT 1
+
 int render_loop(t_cub *cub)
 {
 	static double	last_frame_time = 0.0;
@@ -22,9 +21,9 @@ int render_loop(t_cub *cub)
 	current_time = get_time();
 	delta_time = current_time - last_frame_time;
 
-	if (delta_time < FRAME_TIME)
+	if (delta_time < (1.0f / TARGET_FPS))
 	{
-		usleep((FRAME_TIME - delta_time) * 1000000);
+		usleep(((1.0f / TARGET_FPS) - delta_time) * 1000000);
 		return (0);
 	}
 	last_frame_time = current_time;
