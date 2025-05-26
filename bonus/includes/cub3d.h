@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:24:17 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/21 16:26:12 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/26 17:12:00 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,17 @@
 #define WALL 1
 #define FLOOR 0
 #define BLANK 2
+#define DOOR 3
+#define CEILING 4
 
+# define LEFT 0
+# define RIGHT 1
 //WALL == 1
 //FLOOR == 0
 //BLANK == 2
+
+# define NO_LIGHT 1
+# define LIGHT 0
 
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
@@ -138,10 +145,15 @@ typedef struct	s_map
 	char			**map;
 	int				width;
 	int				height;
+	int			*doors_state;  // Array per tracciare lo stato delle porte (0=chiusa, 1=aperta)
 }		t_map;
 
 //Rendering structures
-
+typedef struct s_2dpoint
+{
+	double	x;
+	double	y;
+}	t_double;
 typedef struct s_2fpoint
 {
 	float	x;
@@ -208,8 +220,8 @@ typedef struct s_keys
 	int	a;
 	int	s;
 	int	d;
-	int	left;
-	int	right;
+	int	space;
+	int	f;
 }	t_keys;
 
 typedef struct s_cub
@@ -226,6 +238,7 @@ typedef struct s_cub
 	double		fps_accum;
 	int			mouse_x;
 	int			mouse_times;
+	int			gun_animation_frame;  // Contatore per l'animazione della pistola
 }	t_cub;
 
 
@@ -283,5 +296,10 @@ void	matrix_helper(char *line, int *matrix, int *j, t_map *map);
 int		check_helper(char *line, char *prev, char *next, int *player);
 void	sizes_helper(char *line, int fd, t_map *map);
 char	*gnl_helper(char *line, int gnl_calls, int fd);
-void		render_textures(t_cub *cub, int x, t_ray *ray);
+void	render_textures(t_cub *cub, int x, t_ray *ray);
+void	init_doors_state(t_map *map);
+void	toggle_door(t_cub *cub);
+int		is_door_open(t_map *map, int x, int y);
+int		get_door_index(t_map *map, int x, int y);
+void	draw_gun(t_cub *cub, int type);
 #endif

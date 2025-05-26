@@ -6,14 +6,72 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 08:38:08 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/21 15:36:13 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/26 16:16:58 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 #include <stdlib.h>
 
-void	load_single_texture(t_cub *cub, t_image *img, char *path)
+static void	load_textures(t_cub *cub);
+
+void	mymlx_init(t_cub *cub, char *argv[])
+{
+	if (!map_parsing(argv[1], &cub->map))
+	{
+		ft_printf("Error: Invalid map file\n");
+		exit (EXIT_FAILURE);
+	}
+	cub->p = NULL;
+	cub->pic.img.p = NULL;
+	cub->pic.win.p = NULL;
+	cub->p = mlx_init();
+	cub->pic.win.p = mlx_new_window(cub->p, SCREEN_WIDTH,
+		SCREEN_HEIGHT, "Cub3d");
+	cub->pic.img.p = mlx_new_image(cub->p, SCREEN_WIDTH, SCREEN_HEIGHT);
+	cub->pic.img.addr = mlx_get_data_addr(cub->pic.img.p, &cub->pic.img.bits_pp, \
+							&cub->pic.img.lenght, &cub->pic.img.endian);
+	cub->pic.img.size = (t_size){SCREEN_WIDTH, SCREEN_HEIGHT};
+	cub->mouse_times = 0;
+	cub->mouse_x = 0;
+	cub->gun_animation_frame = 0;
+	cub->keys = (t_keys){0, 0, 0, 0, 0, 0};
+	load_textures(cub);
+	init_doors_state(&cub->map);
+	raycaster_init(cub);
+	init_fps_counter(cub);
+	mlx_do_key_autorepeaton(cub->p);
+}
+
+
+void	update_dir(t_cub *cub, int type)
+{
+	float		old_dir;
+	float		old_plane;
+	t_2fpoint	*dir;
+	t_2fpoint	*plane;
+
+	old_dir = cub->raycaster.player.dir.x;
+	old_plane = cub->raycaster.player.plane.x;
+	dir = &cub->raycaster.player.dir;
+	plane = &cub->raycaster.player.plane;
+	if (type == LEFT)
+	{
+		dir->x = dir->x * cos(-ROT_SPD) - dir->y * sin(-ROT_SPD);
+		dir->y = old_dir * sin(-ROT_SPD) + dir->y * cos(-ROT_SPD);
+		plane->x = plane->x * cos(-ROT_SPD) - plane->y * sin(-ROT_SPD);
+		plane->y = old_plane * sin(-ROT_SPD) + plane->y * cos(-ROT_SPD);
+	}
+	else if (type == RIGHT)
+	{
+		dir->x = dir->x * cos(ROT_SPD) - dir->y * sin(ROT_SPD);
+		dir->y = old_dir * sin(ROT_SPD) + dir->y * cos(ROT_SPD);
+		plane->x = plane->x * cos(ROT_SPD) - plane->y * sin(ROT_SPD);
+		plane->y = old_plane * sin(ROT_SPD) + plane->y * cos(ROT_SPD);
+	}
+}
+
+static void	load_single_texture(t_cub *cub, t_image *img, char *path)
 {
 	img->p = mlx_xpm_file_to_image(cub->p, path, \
 		&img->size.width, &img->size.height);
@@ -37,54 +95,4 @@ static void	load_textures(t_cub *cub)
 	load_single_texture(cub, &cub->textures.hand, cub->map.data.hand);
 	load_single_texture(cub, &cub->textures.floor_light, cub->map.data.floor1);
 	load_single_texture(cub, &cub->textures.floor_nolight, cub->map.data.floor2);
-}
-
-void	mymlx_init(t_cub *cub, char *argv[])
-{
-	if (!map_parsing(argv[1], &cub->map))
-	{
-		ft_printf("Error: Invalid map file\n");
-		exit (EXIT_FAILURE);
-	}
-	cub->p = NULL;
-	cub->pic.img.p = NULL;
-	cub->pic.win.p = NULL;
-	cub->p = mlx_init();
-	if (!cub->p)
-		exit(EXIT_FAILURE);
-	cub->pic.win.p = mlx_new_window(cub->p, SCREEN_WIDTH,
-		SCREEN_HEIGHT, "Cub3d");
-	cub->pic.img.p = mlx_new_image(cub->p, SCREEN_WIDTH, SCREEN_HEIGHT);
-	cub->pic.img.addr = mlx_get_data_addr(cub->pic.img.p, &cub->pic.img.bits_pp, \
-							&cub->pic.img.lenght, &cub->pic.img.endian);
-	cub->pic.img.size.width = SCREEN_WIDTH;
-	cub->pic.img.size.height = SCREEN_HEIGHT;
-	cub->mouse_times = 0;
-	cub->mouse_x = 0;
-	cub->keys = (t_keys){0, 0, 0, 0, 0, 0};
-	load_textures(cub);
-	raycaster_init(cub);
-	init_fps_counter(cub);
-	mlx_do_key_autorepeaton(cub->p);
-}
-
-int	mymlx_destroy(t_cub *cub)
-{
-	if (cub)
-	{
-		mlx_destroy_image(cub->p, cub->pic.img.p);
-		mlx_destroy_image(cub->p, cub->textures.wall.p);
-		mlx_destroy_image(cub->p, cub->textures.door.p);
-		mlx_destroy_image(cub->p, cub->textures.gun_fire.p);
-		mlx_destroy_image(cub->p, cub->textures.gun_nofire.p);
-		mlx_destroy_image(cub->p, cub->textures.ceiling_light.p);
-		mlx_destroy_image(cub->p, cub->textures.ceiling_nolight.p);
-		mlx_destroy_image(cub->p, cub->textures.floor_light.p);
-		mlx_destroy_image(cub->p, cub->textures.floor_nolight.p);
-		mlx_destroy_window(cub->p, cub->pic.win.p);
-		free (cub->raycaster.rays);
-		free (cub->p);
-		return (1);
-	}
-	return (-1);
 }

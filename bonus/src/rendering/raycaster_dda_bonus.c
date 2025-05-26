@@ -1,18 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycaster_dda.c                                    :+:      :+:    :+:   */
+/*   raycaster_dda_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:12:14 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 16:49:12 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/26 16:28:03 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	update_dda_step(t_ray *ray)
+static int	is_obstacle(t_ray *ray, t_map *map)
+{
+	int	door_state;
+
+	if (map->matrix[ray->cell_pos.y * map->sizes.map_lenght + \
+		ray->cell_pos.x] == WALL)
+		return (1);
+	if (map->matrix[ray->cell_pos.y * map->sizes.map_lenght + \
+		ray->cell_pos.x] == DOOR)
+	{
+		door_state = map->doors_state[ray->cell_pos.y * map->sizes.map_lenght + ray->cell_pos.x];
+		if (door_state == 0)
+			return (1);
+	}
+	return (0);
+}
+
+static void	update_dda_step(t_ray *ray)
 {
 	if ((ray->side_dist.x < ray->side_dist.y))
 	{
@@ -48,8 +65,7 @@ int	execute_dda_step(t_ray *ray, t_map *map)
 		ray->perp_wall_dist = VIEW_DISTANCE;
 		return (1);
 	}
-	if (map->matrix[ray->cell_pos.y * map->sizes.map_lenght + \
-		ray->cell_pos.x] == WALL)
+	if (is_obstacle(ray, map))
 		return (1);
 	return (0);
 }

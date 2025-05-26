@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wall_collisions.c                                  :+:      :+:    :+:   */
+/*   wall_collisions_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:36:03 by apintaur          #+#    #+#             */
-/*   Updated: 2025/05/20 15:36:24 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/05/26 16:38:14 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	is_valid_position(t_cub *cub, t_2ipoint pos)
 {
 	int map_index;
+	int cell_value;
 
 	if (pos.x < 0 || pos.x >= cub->map.sizes.map_lenght ||
 		pos.y < 0 || pos.y >= cub->map.sizes.map_height)
@@ -22,66 +23,89 @@ int	is_valid_position(t_cub *cub, t_2ipoint pos)
 	map_index = pos.y * cub->map.sizes.map_lenght + pos.x;
 	if (map_index < 0 || map_index >= (cub->map.sizes.map_height * cub->map.sizes.map_lenght))
 		return (0);
-	return (cub->map.matrix[map_index] != WALL);
+	cell_value = cub->map.matrix[map_index];
+	if (cell_value == WALL)
+		return (0);
+	if (cell_value == DOOR && !is_door_open(&cub->map, pos.x, pos.y))
+		return (0);
+	return (1);
 }
 
-static int	close_x(t_cub *cub, t_2fpoint pos)
+static int	get_adjacent_cell_coord(t_2ipoint map_pos, float frac,
+							float wall_margin, int axis)
 {
-	t_2ipoint	map_pos;
-	float		frac;
-	int			next_pos;
-	int			next_index;
-	float		wall_margin;
+	int	adjacent_coord;
 
-	map_pos.x = (int)pos.x;		map_pos.y = (int)pos.y;
-		wall_margin = 0.1f;
-		frac = pos.x - map_pos.x;
-	if (frac < wall_margin || frac > (1.0f - wall_margin))
+	if (frac < wall_margin)
 	{
-		next_pos = (frac < wall_margin) ? map_pos.x - 1 : map_pos.x + 1;
-		if (next_pos >= 0 && next_pos < cub->map.sizes.map_lenght)
-		{
-			next_index = map_pos.y * cub->map.sizes.map_lenght
-				+ next_pos;
-			if (next_index >= 0 && next_index < cub->map.sizes.map_height
-				* cub->map.sizes.map_lenght && cub->map.matrix[next_index] == WALL)
-				return (1);
-		}
+		if (axis == 0)
+			adjacent_coord = map_pos.x - 1;
+		else
+			adjacent_coord = map_pos.y - 1;
 	}
+	else
+	{
+		if (axis == 0)
+			adjacent_coord = map_pos.x + 1;
+		else
+			adjacent_coord = map_pos.y + 1;
+	}
+	return (adjacent_coord);
+}
+
+static int	is_adjacent_cell_blocking(t_cub *cub, t_2ipoint map_pos,
+								int adjacent_coord, int axis)
+{
+	int			map_index;
+	t_2ipoint	check;
+
+	if (axis == 0)
+	{
+		check.x = adjacent_coord;
+		check.y = map_pos.y;
+		if (adjacent_coord < 0 || adjacent_coord >= cub->map.sizes.map_lenght)
+			return (0);
+	}
+	else
+	{
+		check.x = map_pos.x;
+		check.y = adjacent_coord;
+		if (adjacent_coord < 0 || adjacent_coord >= cub->map.sizes.map_height)
+			return (0);
+	}
+	map_index = check.y * cub->map.sizes.map_lenght + check.x;
+	if (map_index < 0 || map_index >= (cub->map.sizes.map_height
+		* cub->map.sizes.map_lenght))
+		return (0);
+	if (cub->map.matrix[map_index] == WALL)
+		return (1);
+	if (cub->map.matrix[map_index] == DOOR
+		&& !is_door_open(&cub->map, check.x, check.y))
+		return (1);
 	return (0);
 }
 
-static int	close_y(t_cub *cub, t_2fpoint pos)
+static int	is_too_close_to_wall(t_cub *cub, t_2fpoint pos, int axis)
 {
 	t_2ipoint	map_pos;
 	float		frac;
-	int			next_pos;
-	int			next_index;
 	float		wall_margin;
+	int			adjacent_coord;
 
-	map_pos.x = (int)pos.x;		map_pos.y = (int)pos.y;
-		wall_margin = 0.1f;
+	map_pos = (t_2ipoint){pos.x, pos.y};
+	wall_margin = 0.1f;
+	if (axis == 0)
+		frac = pos.x - map_pos.x;
+	else
 		frac = pos.y - map_pos.y;
 	if (frac < wall_margin || frac > (1.0f - wall_margin))
 	{
-		next_pos = (frac < wall_margin) ? map_pos.y - 1 : map_pos.y + 1;
-		if (next_pos >= 0 && next_pos < cub->map.sizes.map_height)
-		{
-			next_index = next_pos * cub->map.sizes.map_lenght
-				+ map_pos.x;
-			if (next_index >= 0 && next_index < cub->map.sizes.map_height
-				* cub->map.sizes.map_lenght && cub->map.matrix[next_index] == WALL)
-				return (1);
-		}
+		adjacent_coord = get_adjacent_cell_coord(map_pos, frac,
+			wall_margin, axis);
+		if (is_adjacent_cell_blocking(cub, map_pos, adjacent_coord, axis))
+			return (1);
 	}
 	return (0);
-}
-
-int	is_too_close_to_wall(t_cub *cub, t_2fpoint pos, int axis)
-{
-	if (axis == 0)
-		return (close_x(cub, pos));
-	return (close_y(cub, pos));
 }
 
 void	check_collisions(t_cub *cub, t_2fpoint new_pos, t_2fpoint old_pos)
