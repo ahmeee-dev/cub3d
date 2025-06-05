@@ -105,8 +105,8 @@ make
 
 ## 👥 Authors
 
-* [YourGitHubUsername](https://github.com/YourGitHubUsername)
-* [Denuen](https://github.com/Denuen)
+* [ahmeee-dev](https://github.com/ahmeee-dev)
+* [denuen](https://github.com/denuen)
 
 ---
 
