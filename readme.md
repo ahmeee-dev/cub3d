@@ -99,7 +99,8 @@ make
 * Minimap with real-time player position
 * Sprite rendering with depth-sorting
 * Door opening / interactive elements
-* Mouse support (if implemented)
+* Mouse support 
+* Firing gun animation
 
 ---
 
